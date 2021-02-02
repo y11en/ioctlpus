@@ -170,34 +170,43 @@ namespace ioctlpus
                 FileAttributes.Normal,
                 IntPtr.Zero);
 
+            int errorCode = 0;
+
+            uint ioctl = Convert.ToUInt32(tbIOCTL.Text, 16);
             uint returnedBytes = 0;
             uint inputSize = (uint)nudInputSize.Value;
             uint outputSize = (uint)nudOutputSize.Value;
-
-            long hbInputLength = ((DynamicByteProvider)hbInput.ByteProvider).Length;
-            byte[] inputBuffer = new byte[inputSize];
-            MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
-
-            for (int i = 0; i < inputSize; i++)
-                if (i < hbInputLength)
-                    inputBuffer[i] = ((DynamicByteProvider)hbInput.ByteProvider).ReadByte(i);
-                else
-                    inputBuffer[i] = 0;
-
-            long hbOutputLength = ((DynamicByteProvider)hbOutput.ByteProvider).Length;
             byte[] outputBuffer = new byte[outputSize];
-            MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)hbOutputLength);
+            byte[] inputBuffer = new byte[inputSize];
 
-            uint ioctl = Convert.ToUInt32(tbIOCTL.Text, 16);
-            DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
-            int errorCode = Marshal.GetLastWin32Error();
-            sfh.Close();
+            if (sfh.IsInvalid)
+            {
+                errorCode = Marshal.GetLastWin32Error();
+            }
+            else
+            {
+                long hbInputLength = ((DynamicByteProvider)hbInput.ByteProvider).Length;
+                MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
 
-            DynamicByteProvider requestData = new DynamicByteProvider(inputBuffer);
-            hbInput.ByteProvider = requestData;
+                for (int i = 0; i < inputSize; i++)
+                    if (i < hbInputLength)
+                        inputBuffer[i] = ((DynamicByteProvider)hbInput.ByteProvider).ReadByte(i);
+                    else
+                        inputBuffer[i] = 0;
 
-            DynamicByteProvider responseData = new DynamicByteProvider(outputBuffer);
-            hbOutput.ByteProvider = responseData;
+                long hbOutputLength = ((DynamicByteProvider)hbOutput.ByteProvider).Length;
+                MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)hbOutputLength);
+
+                DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
+                errorCode = Marshal.GetLastWin32Error();
+                sfh.Close();
+
+                DynamicByteProvider requestData = new DynamicByteProvider(inputBuffer);
+                hbInput.ByteProvider = requestData;
+
+                DynamicByteProvider responseData = new DynamicByteProvider(outputBuffer);
+                hbOutput.ByteProvider = responseData;
+            }
 
             Request newTx = new Request();
             newTx.RequestName = String.Format(
