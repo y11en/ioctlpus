@@ -1,6 +1,6 @@
-# ioctlpus [![](https://ci.appveyor.com/api/projects/status/github/jthuraisamy/ioctlpus?branch=master&svg=true&passingText=Download)](https://ci.appveyor.com/project/jthuraisamy/ioctlpus/build/artifacts)
+# IOCTLpus
 
-ioctlpus can be used to make `DeviceIoControl` requests with arbitrary inputs (with functionality somewhat similar to Burp Repeater).
+IOCTLpus can be used to make `DeviceIoControl` requests with arbitrary inputs (with functionality somewhat similar to Burp Repeater).
 
 Here is an example of an information leak triggered in a sample vulnerable driver:
 
