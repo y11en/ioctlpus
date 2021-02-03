@@ -35,6 +35,7 @@ namespace ioctlpus
             // Setup initial parameters.
             tbDevicePath.Text = @"\\.\PhysicalDrive0";
             tbIOCTL.Text = "70000";
+            tbAccessMask.Text = "20000000";
         }
 
         /// <summary>
@@ -161,9 +162,10 @@ namespace ioctlpus
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            uint fa_mask = Convert.ToUInt32(tbAccessMask.Text, 16);
             SafeFileHandle sfh = CreateFile(
                 tbDevicePath.Text,
-                (FileAccess)0x2000000,
+                (FileAccess)fa_mask,
                 FileShare.ReadWrite,
                 IntPtr.Zero,
                 FileMode.Open,
@@ -295,6 +297,27 @@ namespace ioctlpus
                 AboutForm aboutForm = Application.OpenForms["AboutForm"] as AboutForm;
                 aboutForm.Focus();
             }
+        }
+
+        private void tbAccessMask_TextChanged(object sender, EventArgs e)
+        {
+            Point toolTipCoords = tbAccessMask.Location;
+            toolTipCoords.X -= 89;
+            toolTipCoords.Y -= 27;
+
+            uint fa_mask;
+            if (!UInt32.TryParse(tbAccessMask.Text, System.Globalization.NumberStyles.HexNumber, null, out fa_mask))
+            {
+                tbAccessMask.BackColor = System.Drawing.Color.MistyRose;
+                btnSend.Enabled = false;
+                toolTip.Show("Access Mask code must be in hexadecimal format.", tbAccessMask, toolTipCoords, 3000);
+            }
+            else
+            {
+                tbAccessMask.BackColor = System.Drawing.Color.White;
+                btnSend.Enabled = true;
+            }
+
         }
     }
 }

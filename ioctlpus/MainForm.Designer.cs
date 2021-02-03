@@ -30,13 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
-            this.tlpPanes = new System.Windows.Forms.TableLayoutPanel();
-            this.gbRightPane = new System.Windows.Forms.GroupBox();
-            this.hbOutput = new Be.Windows.Forms.HexBox();
-            this.gbLeftPane = new System.Windows.Forms.GroupBox();
-            this.hbInput = new Be.Windows.Forms.HexBox();
             this.tlpTop = new System.Windows.Forms.TableLayoutPanel();
             this.pnlReqParams = new System.Windows.Forms.Panel();
+            this.lblInputAccessMask = new System.Windows.Forms.Label();
+            this.tbAccessMask = new System.Windows.Forms.TextBox();
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnAbout = new System.Windows.Forms.Button();
             this.pnlPanes = new System.Windows.Forms.Panel();
@@ -86,11 +83,13 @@
             this.olvColumnRetVal = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnBytesReturned = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.tlpPanes = new System.Windows.Forms.TableLayoutPanel();
+            this.gbRightPane = new System.Windows.Forms.GroupBox();
+            this.hbOutput = new Be.Windows.Forms.HexBox();
+            this.gbLeftPane = new System.Windows.Forms.GroupBox();
+            this.hbInput = new Be.Windows.Forms.HexBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tlpMain.SuspendLayout();
-            this.tlpPanes.SuspendLayout();
-            this.gbRightPane.SuspendLayout();
-            this.gbLeftPane.SuspendLayout();
             this.tlpTop.SuspendLayout();
             this.pnlReqParams.SuspendLayout();
             this.pnlPanes.SuspendLayout();
@@ -105,6 +104,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudInputSize)).BeginInit();
             this.gbRequestHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvRequestHistory)).BeginInit();
+            this.tlpPanes.SuspendLayout();
+            this.gbRightPane.SuspendLayout();
+            this.gbLeftPane.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpMain
@@ -114,87 +116,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpMain.ColumnCount = 1;
             this.tlpMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpMain.Controls.Add(this.tlpPanes, 0, 1);
             this.tlpMain.Controls.Add(this.tlpTop, 0, 0);
             this.tlpMain.Controls.Add(this.gbRequestHistory, 0, 2);
+            this.tlpMain.Controls.Add(this.tlpPanes, 0, 1);
             this.tlpMain.Location = new System.Drawing.Point(12, 12);
             this.tlpMain.Name = "tlpMain";
             this.tlpMain.RowCount = 3;
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlpMain.Size = new System.Drawing.Size(780, 537);
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlpMain.Size = new System.Drawing.Size(780, 615);
             this.tlpMain.TabIndex = 0;
-            // 
-            // tlpPanes
-            // 
-            this.tlpPanes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpPanes.ColumnCount = 2;
-            this.tlpPanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPanes.Controls.Add(this.gbRightPane, 1, 0);
-            this.tlpPanes.Controls.Add(this.gbLeftPane, 0, 0);
-            this.tlpPanes.Location = new System.Drawing.Point(3, 93);
-            this.tlpPanes.Name = "tlpPanes";
-            this.tlpPanes.RowCount = 1;
-            this.tlpPanes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpPanes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 262F));
-            this.tlpPanes.Size = new System.Drawing.Size(774, 262);
-            this.tlpPanes.TabIndex = 0;
-            // 
-            // gbRightPane
-            // 
-            this.gbRightPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbRightPane.Controls.Add(this.hbOutput);
-            this.gbRightPane.Location = new System.Drawing.Point(390, 3);
-            this.gbRightPane.Name = "gbRightPane";
-            this.gbRightPane.Size = new System.Drawing.Size(381, 256);
-            this.gbRightPane.TabIndex = 1;
-            this.gbRightPane.TabStop = false;
-            this.gbRightPane.Text = "Output Buffer";
-            // 
-            // hbOutput
-            // 
-            this.hbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hbOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hbOutput.InfoForeColor = System.Drawing.Color.Empty;
-            this.hbOutput.Location = new System.Drawing.Point(6, 19);
-            this.hbOutput.Name = "hbOutput";
-            this.hbOutput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hbOutput.Size = new System.Drawing.Size(369, 231);
-            this.hbOutput.TabIndex = 0;
-            // 
-            // gbLeftPane
-            // 
-            this.gbLeftPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbLeftPane.Controls.Add(this.hbInput);
-            this.gbLeftPane.Location = new System.Drawing.Point(3, 3);
-            this.gbLeftPane.Name = "gbLeftPane";
-            this.gbLeftPane.Size = new System.Drawing.Size(381, 256);
-            this.gbLeftPane.TabIndex = 0;
-            this.gbLeftPane.TabStop = false;
-            this.gbLeftPane.Text = "Input Buffer";
-            // 
-            // hbInput
-            // 
-            this.hbInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.hbInput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hbInput.InfoForeColor = System.Drawing.Color.Empty;
-            this.hbInput.Location = new System.Drawing.Point(6, 19);
-            this.hbInput.Name = "hbInput";
-            this.hbInput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
-            this.hbInput.Size = new System.Drawing.Size(369, 231);
-            this.hbInput.TabIndex = 0;
             // 
             // tlpTop
             // 
@@ -202,14 +134,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tlpTop.ColumnCount = 1;
-            this.tlpTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTop.Controls.Add(this.pnlReqParams, 0, 0);
             this.tlpTop.Location = new System.Drawing.Point(3, 3);
             this.tlpTop.Name = "tlpTop";
             this.tlpTop.RowCount = 1;
-            this.tlpTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpTop.Size = new System.Drawing.Size(774, 84);
+            this.tlpTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpTop.Size = new System.Drawing.Size(774, 109);
             this.tlpTop.TabIndex = 2;
             // 
             // pnlReqParams
@@ -217,6 +148,8 @@
             this.pnlReqParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlReqParams.Controls.Add(this.lblInputAccessMask);
+            this.pnlReqParams.Controls.Add(this.tbAccessMask);
             this.pnlReqParams.Controls.Add(this.btnSettings);
             this.pnlReqParams.Controls.Add(this.btnAbout);
             this.pnlReqParams.Controls.Add(this.pnlPanes);
@@ -233,15 +166,35 @@
             this.pnlReqParams.Controls.Add(this.btnSend);
             this.pnlReqParams.Location = new System.Drawing.Point(3, 3);
             this.pnlReqParams.Name = "pnlReqParams";
-            this.pnlReqParams.Size = new System.Drawing.Size(768, 78);
+            this.pnlReqParams.Size = new System.Drawing.Size(768, 103);
             this.pnlReqParams.TabIndex = 0;
+            // 
+            // lblInputAccessMask
+            // 
+            this.lblInputAccessMask.AutoSize = true;
+            this.lblInputAccessMask.Location = new System.Drawing.Point(106, 76);
+            this.lblInputAccessMask.Name = "lblInputAccessMask";
+            this.lblInputAccessMask.Size = new System.Drawing.Size(74, 13);
+            this.lblInputAccessMask.TabIndex = 13;
+            this.lblInputAccessMask.Text = "Access Mask:";
+            // 
+            // tbAccessMask
+            // 
+            this.tbAccessMask.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbAccessMask.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbAccessMask.Location = new System.Drawing.Point(181, 74);
+            this.tbAccessMask.MaxLength = 8;
+            this.tbAccessMask.Name = "tbAccessMask";
+            this.tbAccessMask.Size = new System.Drawing.Size(90, 20);
+            this.tbAccessMask.TabIndex = 12;
+            this.tbAccessMask.TextChanged += new System.EventHandler(this.tbAccessMask_TextChanged);
             // 
             // btnSettings
             // 
             this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.Enabled = false;
             this.btnSettings.Image = global::ioctlpus.Properties.Resources.cog;
-            this.btnSettings.Location = new System.Drawing.Point(736, 4);
+            this.btnSettings.Location = new System.Drawing.Point(730, 4);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(32, 32);
             this.btnSettings.TabIndex = 6;
@@ -252,7 +205,7 @@
             // 
             this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAbout.Image = global::ioctlpus.Properties.Resources.help;
-            this.btnAbout.Location = new System.Drawing.Point(736, 43);
+            this.btnAbout.Location = new System.Drawing.Point(730, 46);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(32, 32);
             this.btnAbout.TabIndex = 7;
@@ -687,9 +640,9 @@
             this.gbRequestHistory.Controls.Add(this.btnDeleteRequest);
             this.gbRequestHistory.Controls.Add(this.btnOpenDB);
             this.gbRequestHistory.Controls.Add(this.tlvRequestHistory);
-            this.gbRequestHistory.Location = new System.Drawing.Point(3, 361);
+            this.gbRequestHistory.Location = new System.Drawing.Point(3, 328);
             this.gbRequestHistory.Name = "gbRequestHistory";
-            this.gbRequestHistory.Size = new System.Drawing.Size(774, 173);
+            this.gbRequestHistory.Size = new System.Drawing.Size(774, 284);
             this.gbRequestHistory.TabIndex = 3;
             this.gbRequestHistory.TabStop = false;
             this.gbRequestHistory.Text = "Request History";
@@ -712,7 +665,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFilters.Enabled = false;
             this.tbFilters.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbFilters.Location = new System.Drawing.Point(6, 144);
+            this.tbFilters.Location = new System.Drawing.Point(6, 255);
             this.tbFilters.Name = "tbFilters";
             this.tbFilters.Size = new System.Drawing.Size(724, 20);
             this.tbFilters.TabIndex = 1;
@@ -770,10 +723,12 @@
             this.olvColumnBytesReturned,
             this.olvColumnTime});
             this.tlvRequestHistory.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tlvRequestHistory.HideSelection = false;
             this.tlvRequestHistory.Location = new System.Drawing.Point(6, 19);
             this.tlvRequestHistory.Name = "tlvRequestHistory";
+            this.tlvRequestHistory.OwnerDraw = true;
             this.tlvRequestHistory.ShowGroups = false;
-            this.tlvRequestHistory.Size = new System.Drawing.Size(724, 119);
+            this.tlvRequestHistory.Size = new System.Drawing.Size(724, 230);
             this.tlvRequestHistory.TabIndex = 0;
             this.tlvRequestHistory.UseCompatibleStateImageBehavior = false;
             this.tlvRequestHistory.View = System.Windows.Forms.View.Details;
@@ -782,6 +737,7 @@
             // olvColumnRequest
             // 
             this.olvColumnRequest.AspectName = "RequestName";
+            this.olvColumnRequest.CellPadding = null;
             this.olvColumnRequest.MinimumWidth = 230;
             this.olvColumnRequest.Text = "Request";
             this.olvColumnRequest.Width = 230;
@@ -789,6 +745,7 @@
             // olvColumnRetVal
             // 
             this.olvColumnRetVal.AspectName = "ReturnValueString";
+            this.olvColumnRetVal.CellPadding = null;
             this.olvColumnRetVal.IsEditable = false;
             this.olvColumnRetVal.MinimumWidth = 260;
             this.olvColumnRetVal.Text = "Return Value";
@@ -797,6 +754,7 @@
             // olvColumnBytesReturned
             // 
             this.olvColumnBytesReturned.AspectName = "BytesReturned";
+            this.olvColumnBytesReturned.CellPadding = null;
             this.olvColumnBytesReturned.IsEditable = false;
             this.olvColumnBytesReturned.MinimumWidth = 90;
             this.olvColumnBytesReturned.Text = "Bytes Returned";
@@ -805,10 +763,80 @@
             // olvColumnTime
             // 
             this.olvColumnTime.AspectName = "Timestamp";
+            this.olvColumnTime.CellPadding = null;
             this.olvColumnTime.FillsFreeSpace = true;
             this.olvColumnTime.IsEditable = false;
             this.olvColumnTime.Text = "Time";
             this.olvColumnTime.Width = 80;
+            // 
+            // tlpPanes
+            // 
+            this.tlpPanes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpPanes.ColumnCount = 2;
+            this.tlpPanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpPanes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpPanes.Controls.Add(this.gbRightPane, 1, 0);
+            this.tlpPanes.Controls.Add(this.gbLeftPane, 0, 0);
+            this.tlpPanes.Location = new System.Drawing.Point(3, 118);
+            this.tlpPanes.Name = "tlpPanes";
+            this.tlpPanes.RowCount = 1;
+            this.tlpPanes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpPanes.Size = new System.Drawing.Size(774, 204);
+            this.tlpPanes.TabIndex = 0;
+            // 
+            // gbRightPane
+            // 
+            this.gbRightPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbRightPane.Controls.Add(this.hbOutput);
+            this.gbRightPane.Location = new System.Drawing.Point(390, 3);
+            this.gbRightPane.Name = "gbRightPane";
+            this.gbRightPane.Size = new System.Drawing.Size(381, 198);
+            this.gbRightPane.TabIndex = 1;
+            this.gbRightPane.TabStop = false;
+            this.gbRightPane.Text = "Output Buffer";
+            // 
+            // hbOutput
+            // 
+            this.hbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hbOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hbOutput.InfoForeColor = System.Drawing.Color.Empty;
+            this.hbOutput.Location = new System.Drawing.Point(6, 19);
+            this.hbOutput.Name = "hbOutput";
+            this.hbOutput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hbOutput.Size = new System.Drawing.Size(369, 173);
+            this.hbOutput.TabIndex = 0;
+            // 
+            // gbLeftPane
+            // 
+            this.gbLeftPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbLeftPane.Controls.Add(this.hbInput);
+            this.gbLeftPane.Location = new System.Drawing.Point(3, 3);
+            this.gbLeftPane.Name = "gbLeftPane";
+            this.gbLeftPane.Size = new System.Drawing.Size(381, 198);
+            this.gbLeftPane.TabIndex = 0;
+            this.gbLeftPane.TabStop = false;
+            this.gbLeftPane.Text = "Input Buffer";
+            // 
+            // hbInput
+            // 
+            this.hbInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hbInput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hbInput.InfoForeColor = System.Drawing.Color.Empty;
+            this.hbInput.Location = new System.Drawing.Point(6, 19);
+            this.hbInput.Name = "hbInput";
+            this.hbInput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
+            this.hbInput.Size = new System.Drawing.Size(369, 173);
+            this.hbInput.TabIndex = 0;
             // 
             // toolTip
             // 
@@ -819,16 +847,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(804, 561);
+            this.ClientSize = new System.Drawing.Size(804, 639);
             this.Controls.Add(this.tlpMain);
             this.MinimumSize = new System.Drawing.Size(820, 600);
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "ioctlpus";
             this.tlpMain.ResumeLayout(false);
-            this.tlpPanes.ResumeLayout(false);
-            this.gbRightPane.ResumeLayout(false);
-            this.gbLeftPane.ResumeLayout(false);
             this.tlpTop.ResumeLayout(false);
             this.pnlReqParams.ResumeLayout(false);
             this.pnlReqParams.PerformLayout();
@@ -846,6 +871,9 @@
             this.gbRequestHistory.ResumeLayout(false);
             this.gbRequestHistory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlvRequestHistory)).EndInit();
+            this.tlpPanes.ResumeLayout(false);
+            this.gbRightPane.ResumeLayout(false);
+            this.gbLeftPane.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -910,6 +938,8 @@
         private System.Windows.Forms.RadioButton rbRightPaneStringsView;
         private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Label lblInputAccessMask;
+        private System.Windows.Forms.TextBox tbAccessMask;
     }
 }
 
