@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tlpMain = new System.Windows.Forms.TableLayoutPanel();
             this.tlpTop = new System.Windows.Forms.TableLayoutPanel();
             this.pnlReqParams = new System.Windows.Forms.Panel();
@@ -849,10 +850,11 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(804, 639);
             this.Controls.Add(this.tlpMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(820, 600);
             this.Name = "MainForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "ioctlpus";
+            this.Text = "IOCTLpus";
             this.tlpMain.ResumeLayout(false);
             this.tlpTop.ResumeLayout(false);
             this.pnlReqParams.ResumeLayout(false);

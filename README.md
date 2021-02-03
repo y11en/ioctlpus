@@ -13,7 +13,7 @@ Here is an example of an information leak triggered in a sample vulnerable drive
 - [ ] Apply filters to request history.
 - [ ] Integrate Kaitai Struct to define and view buffer structures ([inspired by](https://github.com/kaitai-io/kaitai_struct_webide/wiki/Features)).
 - [ ] Develop an API to use the tool headlessly (e.g. for fuzzing).
-- [ ] Design a cool logo.
+- [x] Design a cool logo.
 
 ## Similar Tools
 
