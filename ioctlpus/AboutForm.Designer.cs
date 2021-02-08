@@ -46,9 +46,9 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(330, 86);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ioctlpus 0.1.0-alpha\r\n©2017 Jackson Thuraisamy (@Jackson_T)\r\nUpdated in 2021 by P" +
-    "aolo Stagno (@Void_Sec)\r\n\r\nDedicated to my partner and family for putting up wit" +
-    "h me.";
+            this.label1.Text = "ioctlpus 0.2-alpha\r\n©2017 Jackson Thuraisamy (@Jackson_T)\r\nUpdated in 2021 by Pao" +
+    "lo Stagno (@Void_Sec)\r\n\r\nDedicated to my partner and family for putting up with " +
+    "me.";
             // 
             // groupBox1
             // 
