@@ -1,10 +1,11 @@
 # IOCTLpus
-<p align="center">![IOCTLpus](static/ico.ico?raw=true "IOCTLpus Logo")</p>
+![IOCTLpus Logo](static/ico.ico)
+
 IOCTLpus can be used to make `DeviceIoControl` requests with arbitrary inputs (with functionality somewhat similar to Burp Repeater).
 
 Here is an example of an information leak triggered in a sample vulnerable driver:
 
-<p align="center">![IOCTLpus_example](static/ioctlpus_example.png?raw=true "IOCTLpus Example")</p>
+![IOCTLpus Example](static/ioctlpus_example.png)
 
 If no arguments is passed to IOCTLpus, it will run in GUI mode; if the `--cli` argument is passed it will run in CLI mode.
 
