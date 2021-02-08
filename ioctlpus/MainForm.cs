@@ -198,8 +198,8 @@ namespace ioctlpus
 
                 long hbOutputLength = ((DynamicByteProvider)hbOutput.ByteProvider).Length;
                 MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)hbOutputLength);
-
                 DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
+
                 errorCode = Marshal.GetLastWin32Error();
                 sfh.Close();
 
