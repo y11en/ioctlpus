@@ -51,8 +51,8 @@ Example:
 
 ## Developers
 
-Developed in 2017 by Jackson Thuraisamy [@Jackson_T](https://twitter.com/jackson_t)
-Updated in 2021 by Paolo Stagno [@Void_Sec](https://twitter.com/Void_Sec)
+- Developed in 2017 by Jackson Thuraisamy [@Jackson_T](https://twitter.com/jackson_t)
+- Updated in 2021 by Paolo Stagno [@Void_Sec](https://twitter.com/Void_Sec)
 
 ## Licence
 
