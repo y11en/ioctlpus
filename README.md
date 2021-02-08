@@ -1,5 +1,5 @@
 # IOCTLpus
-![IOCTLpus Logo](static/ico.ico)
+![IOCTLpus Logo](static/ico.png)
 
 IOCTLpus can be used to make `DeviceIoControl` requests with arbitrary inputs (with functionality somewhat similar to Burp Repeater).
 
