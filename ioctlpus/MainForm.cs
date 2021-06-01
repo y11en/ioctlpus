@@ -182,6 +182,7 @@ namespace ioctlpus
             uint outputSize = (uint)nudOutputSize.Value;
             byte[] outputBuffer = new byte[outputSize];
             byte[] inputBuffer = new byte[inputSize];
+           
 
             if (sfh.IsInvalid)
             {
@@ -319,6 +320,28 @@ namespace ioctlpus
                 tbAccessMask.BackColor = System.Drawing.Color.White;
                 btnSend.Enabled = true;
             }
+
+        }
+
+        private void nudInputSize_ValueChanged(object sender, EventArgs e)
+        {
+            DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudInputSize.Value]);
+            hbInput.ByteProvider = dbpData;
+        }
+
+        private void nudOutputSize_ValueChanged(object sender, EventArgs e)
+        {
+           DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudOutputSize.Value]);
+            hbInput.ByteProvider = dbpData;
+        }
+
+        private void hbInput_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hbOutput_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

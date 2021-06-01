@@ -534,6 +534,7 @@
             0,
             0,
             0});
+            this.nudOutputSize.ValueChanged += new System.EventHandler(this.nudOutputSize_ValueChanged);
             // 
             // lblRepeat
             // 
@@ -615,6 +616,7 @@
             0,
             0,
             0});
+            this.nudInputSize.ValueChanged += new System.EventHandler(this.nudInputSize_ValueChanged);
             // 
             // btnSend
             // 
@@ -812,6 +814,7 @@
             this.hbOutput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbOutput.Size = new System.Drawing.Size(369, 173);
             this.hbOutput.TabIndex = 0;
+            this.hbOutput.TextChanged += new System.EventHandler(this.hbOutput_TextChanged);
             // 
             // gbLeftPane
             // 
@@ -838,6 +841,7 @@
             this.hbInput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbInput.Size = new System.Drawing.Size(369, 173);
             this.hbInput.TabIndex = 0;
+            this.hbInput.TextChanged += new System.EventHandler(this.hbInput_TextChanged);
             // 
             // toolTip
             // 
