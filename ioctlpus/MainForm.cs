@@ -45,6 +45,8 @@ namespace ioctlpus
         /// <param name="size"></param>
         private void InitializeHexBox(HexBox hexBox, int size)
         {
+            hexBox.UseFixedBytesPerLine = true;
+            hexBox.BytesPerLine = 8;
             hexBox.ColumnInfoVisible = true;
             hexBox.VScrollBarVisible = true;
             hexBox.LineInfoVisible = true;
