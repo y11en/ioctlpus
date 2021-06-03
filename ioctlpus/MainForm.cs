@@ -45,14 +45,16 @@ namespace ioctlpus
         /// <param name="size"></param>
         private void InitializeHexBox(HexBox hexBox, int size)
         {
-            hexBox.UseFixedBytesPerLine = true;
             hexBox.BytesPerLine = 8;
             hexBox.ColumnInfoVisible = true;
-            hexBox.VScrollBarVisible = true;
+            hexBox.GroupSeparatorVisible = true;
+            hexBox.GroupSize = 4;
             hexBox.LineInfoVisible = true;
+            hexBox.ShadowSelectionVisible = true;
             hexBox.StringViewVisible = true;
-            DynamicByteProvider dbpData = new DynamicByteProvider(new byte[size]);
-            hexBox.ByteProvider = dbpData;
+            hexBox.UseFixedBytesPerLine = true;
+            hexBox.VScrollBarVisible = true;
+            hexBox.ByteProvider = new DynamicByteProvider(new byte[size]);
         }
 
         /// <summary>
@@ -331,18 +333,56 @@ namespace ioctlpus
 
         private void nudOutputSize_ValueChanged(object sender, EventArgs e)
         {
-           DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudOutputSize.Value]);
-            hbInput.ByteProvider = dbpData;
+            DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudOutputSize.Value]);
+            hbOutput.ByteProvider = dbpData;
         }
 
-        private void hbInput_TextChanged(object sender, EventArgs e)
+        private void InPaneHexView_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (InPaneHexView.Checked == true)
+            {
+                hbInput.ColumnInfoVisible = true;
+            }
+            else
+            {
+                hbInput.ColumnInfoVisible = false;
+            }
         }
 
-        private void hbOutput_TextChanged(object sender, EventArgs e)
+        private void OutPaneHexView_CheckedChanged(object sender, EventArgs e)
         {
+            if (OutPaneHexView.Checked == true)
+            {
+                hbOutput.ColumnInfoVisible = true;
+            }
+            else
+            {
+                hbOutput.ColumnInfoVisible = false;
+            }
+        }
 
+        private void InPaneStringsView_CheckedChanged(object sender, EventArgs e)
+        {
+            if (InPaneStringsView.Checked == true)
+            {
+                hbInput.StringViewVisible = true;
+            }
+            else
+            {
+                hbInput.StringViewVisible = false;
+            }
+        }
+
+        private void OutPaneStringsView_CheckedChanged(object sender, EventArgs e)
+        {
+            if (OutPaneStringsView.Checked == true)
+            {
+                hbOutput.StringViewVisible = true;
+            }
+            else
+            {
+                hbOutput.StringViewVisible = false;
+            }
         }
     }
 }

@@ -118,7 +118,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(370, 280);
             this.Name = "AboutForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About IOCTLpus";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvComponents)).EndInit();

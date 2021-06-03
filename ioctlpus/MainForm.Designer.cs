@@ -39,27 +39,21 @@
             this.btnAbout = new System.Windows.Forms.Button();
             this.pnlPanes = new System.Windows.Forms.Panel();
             this.pnlLeftPanePrePost = new System.Windows.Forms.Panel();
-            this.rbLeftPanePostCall = new System.Windows.Forms.RadioButton();
-            this.rbLeftPanePreCall = new System.Windows.Forms.RadioButton();
+            this.InPostCall = new System.Windows.Forms.RadioButton();
+            this.InPanePreCall = new System.Windows.Forms.RadioButton();
             this.pnlRightPanePrePost = new System.Windows.Forms.Panel();
-            this.rbRightPanePostCall = new System.Windows.Forms.RadioButton();
-            this.rbRightPanePreCall = new System.Windows.Forms.RadioButton();
+            this.OutPanePostCall = new System.Windows.Forms.RadioButton();
+            this.OutPanePreCall = new System.Windows.Forms.RadioButton();
             this.pnlLeftPaneView = new System.Windows.Forms.Panel();
-            this.rbLeftPaneStringsView = new System.Windows.Forms.RadioButton();
-            this.rbLeftPaneStructEdit = new System.Windows.Forms.RadioButton();
-            this.rbLeftPaneStructView = new System.Windows.Forms.RadioButton();
-            this.rbLeftPaneHexView = new System.Windows.Forms.RadioButton();
+            this.InPaneStringsView = new System.Windows.Forms.CheckBox();
+            this.InPaneStructEdit = new System.Windows.Forms.CheckBox();
+            this.InPaneStructView = new System.Windows.Forms.CheckBox();
+            this.InPaneHexView = new System.Windows.Forms.CheckBox();
             this.pnlRightPaneView = new System.Windows.Forms.Panel();
-            this.rbRightPaneStringsView = new System.Windows.Forms.RadioButton();
-            this.rbRightPaneStuctEdit = new System.Windows.Forms.RadioButton();
-            this.rbRightPaneStructView = new System.Windows.Forms.RadioButton();
-            this.rbRightPaneHexView = new System.Windows.Forms.RadioButton();
-            this.pnlRightPaneInOut = new System.Windows.Forms.Panel();
-            this.rbRightPaneOut = new System.Windows.Forms.RadioButton();
-            this.rbRightPaneIn = new System.Windows.Forms.RadioButton();
-            this.pnlLeftPaneInOut = new System.Windows.Forms.Panel();
-            this.rbLeftPaneOut = new System.Windows.Forms.RadioButton();
-            this.rbLeftPaneIn = new System.Windows.Forms.RadioButton();
+            this.OutPaneStringsView = new System.Windows.Forms.CheckBox();
+            this.OutPaneStuctEdit = new System.Windows.Forms.CheckBox();
+            this.OutPaneStructView = new System.Windows.Forms.CheckBox();
+            this.OutPaneHexView = new System.Windows.Forms.CheckBox();
             this.lblRightPane = new System.Windows.Forms.Label();
             this.lblLeftPane = new System.Windows.Forms.Label();
             this.lblOutputSize = new System.Windows.Forms.Label();
@@ -98,8 +92,6 @@
             this.pnlRightPanePrePost.SuspendLayout();
             this.pnlLeftPaneView.SuspendLayout();
             this.pnlRightPaneView.SuspendLayout();
-            this.pnlRightPaneInOut.SuspendLayout();
-            this.pnlLeftPaneInOut.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudOutputSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRepeat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInputSize)).BeginInit();
@@ -220,281 +212,217 @@
             this.pnlPanes.Controls.Add(this.pnlRightPanePrePost);
             this.pnlPanes.Controls.Add(this.pnlLeftPaneView);
             this.pnlPanes.Controls.Add(this.pnlRightPaneView);
-            this.pnlPanes.Controls.Add(this.pnlRightPaneInOut);
-            this.pnlPanes.Controls.Add(this.pnlLeftPaneInOut);
             this.pnlPanes.Controls.Add(this.lblRightPane);
             this.pnlPanes.Controls.Add(this.lblLeftPane);
-            this.pnlPanes.Location = new System.Drawing.Point(386, 0);
+            this.pnlPanes.Location = new System.Drawing.Point(452, 3);
             this.pnlPanes.Name = "pnlPanes";
-            this.pnlPanes.Size = new System.Drawing.Size(331, 78);
+            this.pnlPanes.Size = new System.Drawing.Size(275, 78);
             this.pnlPanes.TabIndex = 11;
             // 
             // pnlLeftPanePrePost
             // 
-            this.pnlLeftPanePrePost.Controls.Add(this.rbLeftPanePostCall);
-            this.pnlLeftPanePrePost.Controls.Add(this.rbLeftPanePreCall);
-            this.pnlLeftPanePrePost.Location = new System.Drawing.Point(136, 4);
+            this.pnlLeftPanePrePost.Controls.Add(this.InPostCall);
+            this.pnlLeftPanePrePost.Controls.Add(this.InPanePreCall);
+            this.pnlLeftPanePrePost.Location = new System.Drawing.Point(73, 4);
             this.pnlLeftPanePrePost.Name = "pnlLeftPanePrePost";
             this.pnlLeftPanePrePost.Size = new System.Drawing.Size(63, 32);
             this.pnlLeftPanePrePost.TabIndex = 27;
             // 
-            // rbLeftPanePostCall
+            // InPostCall
             // 
-            this.rbLeftPanePostCall.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPanePostCall.Enabled = false;
-            this.rbLeftPanePostCall.Image = global::ioctlpus.Properties.Resources.control_end_blue;
-            this.rbLeftPanePostCall.Location = new System.Drawing.Point(31, 0);
-            this.rbLeftPanePostCall.Name = "rbLeftPanePostCall";
-            this.rbLeftPanePostCall.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPanePostCall.TabIndex = 1;
-            this.toolTip.SetToolTip(this.rbLeftPanePostCall, "Post-Call");
-            this.rbLeftPanePostCall.UseVisualStyleBackColor = true;
+            this.InPostCall.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPostCall.Enabled = false;
+            this.InPostCall.Image = global::ioctlpus.Properties.Resources.control_end_blue;
+            this.InPostCall.Location = new System.Drawing.Point(31, 0);
+            this.InPostCall.Name = "InPostCall";
+            this.InPostCall.Size = new System.Drawing.Size(32, 32);
+            this.InPostCall.TabIndex = 1;
+            this.toolTip.SetToolTip(this.InPostCall, "Post-Call");
+            this.InPostCall.UseVisualStyleBackColor = true;
             // 
-            // rbLeftPanePreCall
+            // InPanePreCall
             // 
-            this.rbLeftPanePreCall.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPanePreCall.Checked = true;
-            this.rbLeftPanePreCall.Image = global::ioctlpus.Properties.Resources.control_start_blue;
-            this.rbLeftPanePreCall.Location = new System.Drawing.Point(0, 0);
-            this.rbLeftPanePreCall.Name = "rbLeftPanePreCall";
-            this.rbLeftPanePreCall.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPanePreCall.TabIndex = 0;
-            this.rbLeftPanePreCall.TabStop = true;
-            this.toolTip.SetToolTip(this.rbLeftPanePreCall, "Pre-Call");
-            this.rbLeftPanePreCall.UseVisualStyleBackColor = true;
+            this.InPanePreCall.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPanePreCall.Checked = true;
+            this.InPanePreCall.Image = global::ioctlpus.Properties.Resources.control_start_blue;
+            this.InPanePreCall.Location = new System.Drawing.Point(0, 0);
+            this.InPanePreCall.Name = "InPanePreCall";
+            this.InPanePreCall.Size = new System.Drawing.Size(32, 32);
+            this.InPanePreCall.TabIndex = 0;
+            this.InPanePreCall.TabStop = true;
+            this.toolTip.SetToolTip(this.InPanePreCall, "Pre-Call");
+            this.InPanePreCall.UseVisualStyleBackColor = true;
             // 
             // pnlRightPanePrePost
             // 
-            this.pnlRightPanePrePost.Controls.Add(this.rbRightPanePostCall);
-            this.pnlRightPanePrePost.Controls.Add(this.rbRightPanePreCall);
-            this.pnlRightPanePrePost.Location = new System.Drawing.Point(136, 42);
+            this.pnlRightPanePrePost.Controls.Add(this.OutPanePostCall);
+            this.pnlRightPanePrePost.Controls.Add(this.OutPanePreCall);
+            this.pnlRightPanePrePost.Location = new System.Drawing.Point(73, 42);
             this.pnlRightPanePrePost.Name = "pnlRightPanePrePost";
             this.pnlRightPanePrePost.Size = new System.Drawing.Size(63, 32);
             this.pnlRightPanePrePost.TabIndex = 26;
             // 
-            // rbRightPanePostCall
+            // OutPanePostCall
             // 
-            this.rbRightPanePostCall.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPanePostCall.Checked = true;
-            this.rbRightPanePostCall.Image = global::ioctlpus.Properties.Resources.control_end_blue;
-            this.rbRightPanePostCall.Location = new System.Drawing.Point(31, 0);
-            this.rbRightPanePostCall.Name = "rbRightPanePostCall";
-            this.rbRightPanePostCall.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPanePostCall.TabIndex = 1;
-            this.rbRightPanePostCall.TabStop = true;
-            this.toolTip.SetToolTip(this.rbRightPanePostCall, "Post-Call");
-            this.rbRightPanePostCall.UseVisualStyleBackColor = true;
+            this.OutPanePostCall.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPanePostCall.Checked = true;
+            this.OutPanePostCall.Image = global::ioctlpus.Properties.Resources.control_end_blue;
+            this.OutPanePostCall.Location = new System.Drawing.Point(31, 0);
+            this.OutPanePostCall.Name = "OutPanePostCall";
+            this.OutPanePostCall.Size = new System.Drawing.Size(32, 32);
+            this.OutPanePostCall.TabIndex = 1;
+            this.OutPanePostCall.TabStop = true;
+            this.toolTip.SetToolTip(this.OutPanePostCall, "Post-Call");
+            this.OutPanePostCall.UseVisualStyleBackColor = true;
             // 
-            // rbRightPanePreCall
+            // OutPanePreCall
             // 
-            this.rbRightPanePreCall.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPanePreCall.Enabled = false;
-            this.rbRightPanePreCall.Image = global::ioctlpus.Properties.Resources.control_start_blue;
-            this.rbRightPanePreCall.Location = new System.Drawing.Point(0, 0);
-            this.rbRightPanePreCall.Name = "rbRightPanePreCall";
-            this.rbRightPanePreCall.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPanePreCall.TabIndex = 0;
-            this.toolTip.SetToolTip(this.rbRightPanePreCall, "Pre-Call");
-            this.rbRightPanePreCall.UseVisualStyleBackColor = true;
+            this.OutPanePreCall.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPanePreCall.Enabled = false;
+            this.OutPanePreCall.Image = global::ioctlpus.Properties.Resources.control_start_blue;
+            this.OutPanePreCall.Location = new System.Drawing.Point(0, 0);
+            this.OutPanePreCall.Name = "OutPanePreCall";
+            this.OutPanePreCall.Size = new System.Drawing.Size(32, 32);
+            this.OutPanePreCall.TabIndex = 0;
+            this.toolTip.SetToolTip(this.OutPanePreCall, "Pre-Call");
+            this.OutPanePreCall.UseVisualStyleBackColor = true;
             // 
             // pnlLeftPaneView
             // 
-            this.pnlLeftPaneView.Controls.Add(this.rbLeftPaneStringsView);
-            this.pnlLeftPaneView.Controls.Add(this.rbLeftPaneStructEdit);
-            this.pnlLeftPaneView.Controls.Add(this.rbLeftPaneStructView);
-            this.pnlLeftPaneView.Controls.Add(this.rbLeftPaneHexView);
-            this.pnlLeftPaneView.Location = new System.Drawing.Point(205, 4);
+            this.pnlLeftPaneView.Controls.Add(this.InPaneStringsView);
+            this.pnlLeftPaneView.Controls.Add(this.InPaneStructEdit);
+            this.pnlLeftPaneView.Controls.Add(this.InPaneStructView);
+            this.pnlLeftPaneView.Controls.Add(this.InPaneHexView);
+            this.pnlLeftPaneView.Location = new System.Drawing.Point(142, 4);
             this.pnlLeftPaneView.Name = "pnlLeftPaneView";
             this.pnlLeftPaneView.Size = new System.Drawing.Size(125, 32);
             this.pnlLeftPaneView.TabIndex = 25;
             // 
-            // rbLeftPaneStringsView
+            // InPaneStringsView
             // 
-            this.rbLeftPaneStringsView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneStringsView.Enabled = false;
-            this.rbLeftPaneStringsView.Image = global::ioctlpus.Properties.Resources.application_view_list;
-            this.rbLeftPaneStringsView.Location = new System.Drawing.Point(31, 0);
-            this.rbLeftPaneStringsView.Name = "rbLeftPaneStringsView";
-            this.rbLeftPaneStringsView.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneStringsView.TabIndex = 2;
-            this.toolTip.SetToolTip(this.rbLeftPaneStringsView, "Strings View");
-            this.rbLeftPaneStringsView.UseVisualStyleBackColor = true;
+            this.InPaneStringsView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPaneStringsView.Checked = true;
+            this.InPaneStringsView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.InPaneStringsView.Image = global::ioctlpus.Properties.Resources.application_view_list;
+            this.InPaneStringsView.Location = new System.Drawing.Point(31, 0);
+            this.InPaneStringsView.Name = "InPaneStringsView";
+            this.InPaneStringsView.Size = new System.Drawing.Size(32, 32);
+            this.InPaneStringsView.TabIndex = 2;
+            this.toolTip.SetToolTip(this.InPaneStringsView, "Strings View");
+            this.InPaneStringsView.UseVisualStyleBackColor = true;
+            this.InPaneStringsView.CheckedChanged += new System.EventHandler(this.InPaneStringsView_CheckedChanged);
             // 
-            // rbLeftPaneStructEdit
+            // InPaneStructEdit
             // 
-            this.rbLeftPaneStructEdit.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneStructEdit.Enabled = false;
-            this.rbLeftPaneStructEdit.Image = global::ioctlpus.Properties.Resources.application_edit;
-            this.rbLeftPaneStructEdit.Location = new System.Drawing.Point(93, 0);
-            this.rbLeftPaneStructEdit.Name = "rbLeftPaneStructEdit";
-            this.rbLeftPaneStructEdit.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneStructEdit.TabIndex = 0;
-            this.toolTip.SetToolTip(this.rbLeftPaneStructEdit, "Struct Editor");
-            this.rbLeftPaneStructEdit.UseVisualStyleBackColor = true;
+            this.InPaneStructEdit.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPaneStructEdit.Enabled = false;
+            this.InPaneStructEdit.Image = global::ioctlpus.Properties.Resources.application_edit;
+            this.InPaneStructEdit.Location = new System.Drawing.Point(93, 0);
+            this.InPaneStructEdit.Name = "InPaneStructEdit";
+            this.InPaneStructEdit.Size = new System.Drawing.Size(32, 32);
+            this.InPaneStructEdit.TabIndex = 0;
+            this.toolTip.SetToolTip(this.InPaneStructEdit, "Struct Editor");
+            this.InPaneStructEdit.UseVisualStyleBackColor = true;
             // 
-            // rbLeftPaneStructView
+            // InPaneStructView
             // 
-            this.rbLeftPaneStructView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneStructView.Enabled = false;
-            this.rbLeftPaneStructView.Image = global::ioctlpus.Properties.Resources.application_side_tree;
-            this.rbLeftPaneStructView.Location = new System.Drawing.Point(62, 0);
-            this.rbLeftPaneStructView.Name = "rbLeftPaneStructView";
-            this.rbLeftPaneStructView.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneStructView.TabIndex = 3;
-            this.toolTip.SetToolTip(this.rbLeftPaneStructView, "Struct View");
-            this.rbLeftPaneStructView.UseVisualStyleBackColor = true;
+            this.InPaneStructView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPaneStructView.Enabled = false;
+            this.InPaneStructView.Image = global::ioctlpus.Properties.Resources.application_side_tree;
+            this.InPaneStructView.Location = new System.Drawing.Point(62, 0);
+            this.InPaneStructView.Name = "InPaneStructView";
+            this.InPaneStructView.Size = new System.Drawing.Size(32, 32);
+            this.InPaneStructView.TabIndex = 3;
+            this.toolTip.SetToolTip(this.InPaneStructView, "Struct View");
+            this.InPaneStructView.UseVisualStyleBackColor = true;
             // 
-            // rbLeftPaneHexView
+            // InPaneHexView
             // 
-            this.rbLeftPaneHexView.AccessibleDescription = "test";
-            this.rbLeftPaneHexView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneHexView.Checked = true;
-            this.rbLeftPaneHexView.Image = global::ioctlpus.Properties.Resources.application_view_columns;
-            this.rbLeftPaneHexView.Location = new System.Drawing.Point(0, 0);
-            this.rbLeftPaneHexView.Name = "rbLeftPaneHexView";
-            this.rbLeftPaneHexView.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneHexView.TabIndex = 1;
-            this.rbLeftPaneHexView.TabStop = true;
-            this.toolTip.SetToolTip(this.rbLeftPaneHexView, "Hex View");
-            this.rbLeftPaneHexView.UseVisualStyleBackColor = true;
+            this.InPaneHexView.AccessibleDescription = "test";
+            this.InPaneHexView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.InPaneHexView.Checked = true;
+            this.InPaneHexView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.InPaneHexView.Image = global::ioctlpus.Properties.Resources.application_view_columns;
+            this.InPaneHexView.Location = new System.Drawing.Point(0, 0);
+            this.InPaneHexView.Name = "InPaneHexView";
+            this.InPaneHexView.Size = new System.Drawing.Size(32, 32);
+            this.InPaneHexView.TabIndex = 1;
+            this.toolTip.SetToolTip(this.InPaneHexView, "Hex View");
+            this.InPaneHexView.UseVisualStyleBackColor = true;
+            this.InPaneHexView.CheckedChanged += new System.EventHandler(this.InPaneHexView_CheckedChanged);
             // 
             // pnlRightPaneView
             // 
-            this.pnlRightPaneView.Controls.Add(this.rbRightPaneStringsView);
-            this.pnlRightPaneView.Controls.Add(this.rbRightPaneStuctEdit);
-            this.pnlRightPaneView.Controls.Add(this.rbRightPaneStructView);
-            this.pnlRightPaneView.Controls.Add(this.rbRightPaneHexView);
-            this.pnlRightPaneView.Location = new System.Drawing.Point(205, 42);
+            this.pnlRightPaneView.Controls.Add(this.OutPaneStringsView);
+            this.pnlRightPaneView.Controls.Add(this.OutPaneStuctEdit);
+            this.pnlRightPaneView.Controls.Add(this.OutPaneStructView);
+            this.pnlRightPaneView.Controls.Add(this.OutPaneHexView);
+            this.pnlRightPaneView.Location = new System.Drawing.Point(142, 42);
             this.pnlRightPaneView.Name = "pnlRightPaneView";
             this.pnlRightPaneView.Size = new System.Drawing.Size(125, 32);
             this.pnlRightPaneView.TabIndex = 24;
             // 
-            // rbRightPaneStringsView
+            // OutPaneStringsView
             // 
-            this.rbRightPaneStringsView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneStringsView.Enabled = false;
-            this.rbRightPaneStringsView.Image = global::ioctlpus.Properties.Resources.application_view_list;
-            this.rbRightPaneStringsView.Location = new System.Drawing.Point(31, 0);
-            this.rbRightPaneStringsView.Name = "rbRightPaneStringsView";
-            this.rbRightPaneStringsView.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneStringsView.TabIndex = 1;
-            this.toolTip.SetToolTip(this.rbRightPaneStringsView, "Strings View");
-            this.rbRightPaneStringsView.UseVisualStyleBackColor = true;
+            this.OutPaneStringsView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPaneStringsView.Checked = true;
+            this.OutPaneStringsView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.OutPaneStringsView.Image = global::ioctlpus.Properties.Resources.application_view_list;
+            this.OutPaneStringsView.Location = new System.Drawing.Point(31, 0);
+            this.OutPaneStringsView.Name = "OutPaneStringsView";
+            this.OutPaneStringsView.Size = new System.Drawing.Size(32, 32);
+            this.OutPaneStringsView.TabIndex = 1;
+            this.toolTip.SetToolTip(this.OutPaneStringsView, "Strings View");
+            this.OutPaneStringsView.UseVisualStyleBackColor = true;
+            this.OutPaneStringsView.CheckedChanged += new System.EventHandler(this.OutPaneStringsView_CheckedChanged);
             // 
-            // rbRightPaneStuctEdit
+            // OutPaneStuctEdit
             // 
-            this.rbRightPaneStuctEdit.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneStuctEdit.Enabled = false;
-            this.rbRightPaneStuctEdit.Image = global::ioctlpus.Properties.Resources.application_edit;
-            this.rbRightPaneStuctEdit.Location = new System.Drawing.Point(93, 0);
-            this.rbRightPaneStuctEdit.Name = "rbRightPaneStuctEdit";
-            this.rbRightPaneStuctEdit.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneStuctEdit.TabIndex = 3;
-            this.toolTip.SetToolTip(this.rbRightPaneStuctEdit, "Struct Editor");
-            this.rbRightPaneStuctEdit.UseVisualStyleBackColor = true;
+            this.OutPaneStuctEdit.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPaneStuctEdit.Enabled = false;
+            this.OutPaneStuctEdit.Image = global::ioctlpus.Properties.Resources.application_edit;
+            this.OutPaneStuctEdit.Location = new System.Drawing.Point(93, 0);
+            this.OutPaneStuctEdit.Name = "OutPaneStuctEdit";
+            this.OutPaneStuctEdit.Size = new System.Drawing.Size(32, 32);
+            this.OutPaneStuctEdit.TabIndex = 3;
+            this.toolTip.SetToolTip(this.OutPaneStuctEdit, "Struct Editor");
+            this.OutPaneStuctEdit.UseVisualStyleBackColor = true;
             // 
-            // rbRightPaneStructView
+            // OutPaneStructView
             // 
-            this.rbRightPaneStructView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneStructView.Enabled = false;
-            this.rbRightPaneStructView.Image = global::ioctlpus.Properties.Resources.application_side_tree;
-            this.rbRightPaneStructView.Location = new System.Drawing.Point(62, 0);
-            this.rbRightPaneStructView.Name = "rbRightPaneStructView";
-            this.rbRightPaneStructView.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneStructView.TabIndex = 2;
-            this.toolTip.SetToolTip(this.rbRightPaneStructView, "Struct View");
-            this.rbRightPaneStructView.UseVisualStyleBackColor = true;
+            this.OutPaneStructView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPaneStructView.Enabled = false;
+            this.OutPaneStructView.Image = global::ioctlpus.Properties.Resources.application_side_tree;
+            this.OutPaneStructView.Location = new System.Drawing.Point(62, 0);
+            this.OutPaneStructView.Name = "OutPaneStructView";
+            this.OutPaneStructView.Size = new System.Drawing.Size(32, 32);
+            this.OutPaneStructView.TabIndex = 2;
+            this.toolTip.SetToolTip(this.OutPaneStructView, "Struct View");
+            this.OutPaneStructView.UseVisualStyleBackColor = true;
             // 
-            // rbRightPaneHexView
+            // OutPaneHexView
             // 
-            this.rbRightPaneHexView.AccessibleDescription = "";
-            this.rbRightPaneHexView.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneHexView.Checked = true;
-            this.rbRightPaneHexView.Image = global::ioctlpus.Properties.Resources.application_view_columns;
-            this.rbRightPaneHexView.Location = new System.Drawing.Point(0, 0);
-            this.rbRightPaneHexView.Name = "rbRightPaneHexView";
-            this.rbRightPaneHexView.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneHexView.TabIndex = 0;
-            this.rbRightPaneHexView.TabStop = true;
-            this.toolTip.SetToolTip(this.rbRightPaneHexView, "Hex View");
-            this.rbRightPaneHexView.UseVisualStyleBackColor = true;
-            // 
-            // pnlRightPaneInOut
-            // 
-            this.pnlRightPaneInOut.Controls.Add(this.rbRightPaneOut);
-            this.pnlRightPaneInOut.Controls.Add(this.rbRightPaneIn);
-            this.pnlRightPaneInOut.Location = new System.Drawing.Point(67, 42);
-            this.pnlRightPaneInOut.Name = "pnlRightPaneInOut";
-            this.pnlRightPaneInOut.Size = new System.Drawing.Size(63, 32);
-            this.pnlRightPaneInOut.TabIndex = 23;
-            // 
-            // rbRightPaneOut
-            // 
-            this.rbRightPaneOut.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneOut.Checked = true;
-            this.rbRightPaneOut.Image = global::ioctlpus.Properties.Resources.arrow_out;
-            this.rbRightPaneOut.Location = new System.Drawing.Point(31, 0);
-            this.rbRightPaneOut.Name = "rbRightPaneOut";
-            this.rbRightPaneOut.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneOut.TabIndex = 1;
-            this.rbRightPaneOut.TabStop = true;
-            this.toolTip.SetToolTip(this.rbRightPaneOut, "Output Buffer");
-            this.rbRightPaneOut.UseVisualStyleBackColor = true;
-            // 
-            // rbRightPaneIn
-            // 
-            this.rbRightPaneIn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbRightPaneIn.Enabled = false;
-            this.rbRightPaneIn.Image = global::ioctlpus.Properties.Resources.arrow_in;
-            this.rbRightPaneIn.Location = new System.Drawing.Point(0, 0);
-            this.rbRightPaneIn.Name = "rbRightPaneIn";
-            this.rbRightPaneIn.Size = new System.Drawing.Size(32, 32);
-            this.rbRightPaneIn.TabIndex = 0;
-            this.toolTip.SetToolTip(this.rbRightPaneIn, "Input Buffer");
-            this.rbRightPaneIn.UseVisualStyleBackColor = true;
-            // 
-            // pnlLeftPaneInOut
-            // 
-            this.pnlLeftPaneInOut.Controls.Add(this.rbLeftPaneOut);
-            this.pnlLeftPaneInOut.Controls.Add(this.rbLeftPaneIn);
-            this.pnlLeftPaneInOut.Location = new System.Drawing.Point(67, 4);
-            this.pnlLeftPaneInOut.Name = "pnlLeftPaneInOut";
-            this.pnlLeftPaneInOut.Size = new System.Drawing.Size(63, 32);
-            this.pnlLeftPaneInOut.TabIndex = 22;
-            // 
-            // rbLeftPaneOut
-            // 
-            this.rbLeftPaneOut.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneOut.Enabled = false;
-            this.rbLeftPaneOut.Image = global::ioctlpus.Properties.Resources.arrow_out;
-            this.rbLeftPaneOut.Location = new System.Drawing.Point(31, 0);
-            this.rbLeftPaneOut.Name = "rbLeftPaneOut";
-            this.rbLeftPaneOut.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneOut.TabIndex = 1;
-            this.toolTip.SetToolTip(this.rbLeftPaneOut, "Output Buffer");
-            this.rbLeftPaneOut.UseVisualStyleBackColor = true;
-            // 
-            // rbLeftPaneIn
-            // 
-            this.rbLeftPaneIn.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbLeftPaneIn.Checked = true;
-            this.rbLeftPaneIn.Image = global::ioctlpus.Properties.Resources.arrow_in;
-            this.rbLeftPaneIn.Location = new System.Drawing.Point(0, 0);
-            this.rbLeftPaneIn.Name = "rbLeftPaneIn";
-            this.rbLeftPaneIn.Size = new System.Drawing.Size(32, 32);
-            this.rbLeftPaneIn.TabIndex = 0;
-            this.rbLeftPaneIn.TabStop = true;
-            this.toolTip.SetToolTip(this.rbLeftPaneIn, "Input Buffer");
-            this.rbLeftPaneIn.UseVisualStyleBackColor = true;
+            this.OutPaneHexView.AccessibleDescription = "";
+            this.OutPaneHexView.Appearance = System.Windows.Forms.Appearance.Button;
+            this.OutPaneHexView.Checked = true;
+            this.OutPaneHexView.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.OutPaneHexView.Image = global::ioctlpus.Properties.Resources.application_view_columns;
+            this.OutPaneHexView.Location = new System.Drawing.Point(0, 0);
+            this.OutPaneHexView.Name = "OutPaneHexView";
+            this.OutPaneHexView.Size = new System.Drawing.Size(32, 32);
+            this.OutPaneHexView.TabIndex = 0;
+            this.toolTip.SetToolTip(this.OutPaneHexView, "Hex View");
+            this.OutPaneHexView.UseVisualStyleBackColor = true;
+            this.OutPaneHexView.CheckedChanged += new System.EventHandler(this.OutPaneHexView_CheckedChanged);
             // 
             // lblRightPane
             // 
             this.lblRightPane.AutoSize = true;
             this.lblRightPane.Location = new System.Drawing.Point(5, 51);
             this.lblRightPane.Name = "lblRightPane";
-            this.lblRightPane.Size = new System.Drawing.Size(63, 13);
+            this.lblRightPane.Size = new System.Drawing.Size(70, 13);
             this.lblRightPane.TabIndex = 12;
-            this.lblRightPane.Text = "Right Pane:";
+            this.lblRightPane.Text = "Output Pane:";
             this.lblRightPane.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblLeftPane
@@ -502,9 +430,9 @@
             this.lblLeftPane.AutoSize = true;
             this.lblLeftPane.Location = new System.Drawing.Point(5, 14);
             this.lblLeftPane.Name = "lblLeftPane";
-            this.lblLeftPane.Size = new System.Drawing.Size(56, 13);
+            this.lblLeftPane.Size = new System.Drawing.Size(62, 13);
             this.lblLeftPane.TabIndex = 7;
-            this.lblLeftPane.Text = "Left Pane:";
+            this.lblLeftPane.Text = "Input Pane:";
             this.lblLeftPane.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblOutputSize
@@ -556,11 +484,11 @@
             // lblInputSize
             // 
             this.lblInputSize.AutoSize = true;
-            this.lblInputSize.Location = new System.Drawing.Point(123, 52);
+            this.lblInputSize.Location = new System.Drawing.Point(97, 52);
             this.lblInputSize.Name = "lblInputSize";
-            this.lblInputSize.Size = new System.Drawing.Size(57, 13);
+            this.lblInputSize.Size = new System.Drawing.Size(83, 13);
             this.lblInputSize.TabIndex = 6;
-            this.lblInputSize.Text = "Input Size:";
+            this.lblInputSize.Text = "(hex) Input Size:";
             // 
             // lblIOCTLCode
             // 
@@ -624,7 +552,7 @@
             this.btnSend.Image = global::ioctlpus.Properties.Resources.lightning;
             this.btnSend.Location = new System.Drawing.Point(0, 0);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(105, 78);
+            this.btnSend.Size = new System.Drawing.Size(91, 78);
             this.btnSend.TabIndex = 0;
             this.btnSend.Text = "&Send";
             this.btnSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -807,14 +735,20 @@
             this.hbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.hbOutput.BytesPerLine = 8;
+            this.hbOutput.ColumnInfoVisible = true;
             this.hbOutput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hbOutput.GroupSeparatorVisible = true;
             this.hbOutput.InfoForeColor = System.Drawing.Color.Empty;
+            this.hbOutput.LineInfoVisible = true;
             this.hbOutput.Location = new System.Drawing.Point(6, 19);
             this.hbOutput.Name = "hbOutput";
             this.hbOutput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbOutput.Size = new System.Drawing.Size(369, 173);
+            this.hbOutput.StringViewVisible = true;
             this.hbOutput.TabIndex = 0;
-            this.hbOutput.TextChanged += new System.EventHandler(this.hbOutput_TextChanged);
+            this.hbOutput.UseFixedBytesPerLine = true;
+            this.hbOutput.VScrollBarVisible = true;
             // 
             // gbLeftPane
             // 
@@ -834,14 +768,20 @@
             this.hbInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.hbInput.BytesPerLine = 8;
+            this.hbInput.ColumnInfoVisible = true;
             this.hbInput.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hbInput.GroupSeparatorVisible = true;
             this.hbInput.InfoForeColor = System.Drawing.Color.Empty;
+            this.hbInput.LineInfoVisible = true;
             this.hbInput.Location = new System.Drawing.Point(6, 19);
             this.hbInput.Name = "hbInput";
             this.hbInput.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hbInput.Size = new System.Drawing.Size(369, 173);
+            this.hbInput.StringViewVisible = true;
             this.hbInput.TabIndex = 0;
-            this.hbInput.TextChanged += new System.EventHandler(this.hbInput_TextChanged);
+            this.hbInput.UseFixedBytesPerLine = true;
+            this.hbInput.VScrollBarVisible = true;
             // 
             // toolTip
             // 
@@ -869,8 +809,6 @@
             this.pnlRightPanePrePost.ResumeLayout(false);
             this.pnlLeftPaneView.ResumeLayout(false);
             this.pnlRightPaneView.ResumeLayout(false);
-            this.pnlRightPaneInOut.ResumeLayout(false);
-            this.pnlLeftPaneInOut.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudOutputSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRepeat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudInputSize)).EndInit();
@@ -917,31 +855,25 @@
         private System.Windows.Forms.TextBox tbFilters;
         private System.Windows.Forms.Button btnSaveDB;
         private System.Windows.Forms.Panel pnlPanes;
-        private System.Windows.Forms.Panel pnlLeftPaneInOut;
-        private System.Windows.Forms.RadioButton rbLeftPaneOut;
-        private System.Windows.Forms.RadioButton rbLeftPaneIn;
         private System.Windows.Forms.Label lblRightPane;
         private System.Windows.Forms.Label lblLeftPane;
         private System.Windows.Forms.Panel pnlRightPaneView;
-        private System.Windows.Forms.RadioButton rbRightPaneStuctEdit;
-        private System.Windows.Forms.RadioButton rbRightPaneStructView;
-        private System.Windows.Forms.RadioButton rbRightPaneHexView;
-        private System.Windows.Forms.Panel pnlRightPaneInOut;
-        private System.Windows.Forms.RadioButton rbRightPaneOut;
-        private System.Windows.Forms.RadioButton rbRightPaneIn;
+        private System.Windows.Forms.CheckBox OutPaneStuctEdit;
+        private System.Windows.Forms.CheckBox OutPaneStructView;
+        private System.Windows.Forms.CheckBox OutPaneHexView;
         private System.Windows.Forms.Panel pnlLeftPaneView;
-        private System.Windows.Forms.RadioButton rbLeftPaneStructEdit;
-        private System.Windows.Forms.RadioButton rbLeftPaneStructView;
-        private System.Windows.Forms.RadioButton rbLeftPaneHexView;
+        private System.Windows.Forms.CheckBox InPaneStructEdit;
+        private System.Windows.Forms.CheckBox InPaneStructView;
+        private System.Windows.Forms.CheckBox InPaneHexView;
         private System.Windows.Forms.Panel pnlLeftPanePrePost;
-        private System.Windows.Forms.RadioButton rbLeftPanePostCall;
-        private System.Windows.Forms.RadioButton rbLeftPanePreCall;
+        private System.Windows.Forms.RadioButton InPostCall;
+        private System.Windows.Forms.RadioButton InPanePreCall;
         private System.Windows.Forms.Panel pnlRightPanePrePost;
-        private System.Windows.Forms.RadioButton rbRightPanePostCall;
-        private System.Windows.Forms.RadioButton rbRightPanePreCall;
+        private System.Windows.Forms.RadioButton OutPanePostCall;
+        private System.Windows.Forms.RadioButton OutPanePreCall;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.RadioButton rbLeftPaneStringsView;
-        private System.Windows.Forms.RadioButton rbRightPaneStringsView;
+        private System.Windows.Forms.CheckBox InPaneStringsView;
+        private System.Windows.Forms.CheckBox OutPaneStringsView;
         private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Label lblInputAccessMask;
