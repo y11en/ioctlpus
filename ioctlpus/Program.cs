@@ -72,97 +72,96 @@ namespace ioctlpus
         static void Main(string[] args)
         {
             // handle args parsing
-            CommandLine.Parser.Default.ParseArguments<Options>(args).WithParsed(Run);
-        }
-
-        static void Run(Options opts)
-        {
-            // if the cli arg parameter is specified the software will run in CLI mode
-            if (opts.Cli)
+            Parser.Default.ParseArguments<Options>(args).WithParsed(opts =>
             {
-                Console.WriteLine("IOCTLpus CLI Mode\n--------------------\n");
-                // hanlde some required parameters
-                if (opts.Guid == null)
-                { 
-                    Console.WriteLine("Required option 'guid' is missing.");
-                    return;
-                }
-                if (opts.Ioctl == null)
+                // if the cli arg parameter is specified the software will run in CLI mode
+                if (opts.Cli)
                 {
-                    Console.WriteLine("Required option 'ioctl' is missing.");
-                    return;
-                }
-                if (opts.Input_buffer == null)
-                {
-                    Console.WriteLine("Required option 'input' is missing.");
-                    return;
-                }
-                // if we gathered every parameter we can proceed and perform the IOCTL request printing out the result
-                uint fa_mask = Convert.ToUInt32(opts.Access_mask, 16);
-                SafeFileHandle sfh = CreateFile(
-                    opts.Guid,
-                    (FileAccess)fa_mask,
-                    FileShare.ReadWrite,
-                    IntPtr.Zero,
-                    FileMode.Open,
-                    FileAttributes.Normal,
-                    IntPtr.Zero);
+                    Console.WriteLine("IOCTLpus CLI Mode\n--------------------\n");
+                    // hanlde some required parameters
+                    if (opts.Guid == null)
+                    {
+                        Console.WriteLine("Required option 'guid' is missing.");
+                        return;
+                    }
+                    if (opts.Ioctl == null)
+                    {
+                        Console.WriteLine("Required option 'ioctl' is missing.");
+                        return;
+                    }
+                    if (opts.Input_buffer == null)
+                    {
+                        Console.WriteLine("Required option 'input' is missing.");
+                        return;
+                    }
+                    // if we gathered every parameter we can proceed and perform the IOCTL request printing out the result
+                    uint fa_mask = Convert.ToUInt32(opts.Access_mask, 16);
+                    SafeFileHandle sfh = CreateFile(
+                        opts.Guid,
+                        (FileAccess)fa_mask,
+                        FileShare.ReadWrite,
+                        IntPtr.Zero,
+                        FileMode.Open,
+                        FileAttributes.Normal,
+                        IntPtr.Zero);
 
-                int errorCode = 0;
+                    int errorCode = 0;
 
-                uint ioctl = Convert.ToUInt32(opts.Ioctl, 16);
-                uint returnedBytes = 0;
-                uint inputSize = (uint)opts.Input_size;
-                uint outputSize = (uint)opts.Output_size;
-                byte[] outputBuffer = new byte[outputSize];
-                byte[] inputBuffer = new byte[inputSize];
+                    uint ioctl = Convert.ToUInt32(opts.Ioctl, 16);
+                    uint returnedBytes = 0;
+                    uint inputSize = (uint)opts.Input_size;
+                    uint outputSize = (uint)opts.Output_size;
+                    byte[] outputBuffer = new byte[outputSize];
+                    byte[] inputBuffer = new byte[inputSize];
 
-                if (sfh.IsInvalid)
-                {
-                    string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
-                    Console.WriteLine(errorMessage);
-                    return;
+                    if (sfh.IsInvalid)
+                    {
+                        string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
+                        Console.WriteLine(errorMessage);
+                        return;
+                    }
+                    else
+                    {
+                        // grab the opts.Input_buffer transform it into a byte array
+                        byte[] hbInput = StringToByteArray(opts.Input_buffer);
+                        long hbInputLength = hbInput.Length;
+                        MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
+
+                        for (int i = 0; i < inputSize; i++)
+                        {
+                            inputBuffer[i] = hbInput[i];
+                        }
+                        MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)outputBuffer.Length);
+                        DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
+
+                        errorCode = Marshal.GetLastWin32Error();
+                        string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
+                        sfh.Close();
+                        // print out returning values
+                        Console.WriteLine("GUID:\t\t" + opts.Guid);
+                        Console.WriteLine("IOCTL:\t\t0x{0:X}", ioctl);
+                        Console.WriteLine("Input Buffer:\t" + ByteArrayToString(inputBuffer));
+                        Console.WriteLine("Returned Bytes:\t{0:D}", returnedBytes);
+                        Console.WriteLine("Output Buffer:\t" + ByteArrayToString(outputBuffer));
+                        Console.WriteLine("Error:\t\t0x{0:X} - " + errorMessage, errorCode);
+                    }
                 }
+                // run IOCTLpus in GUI mode
                 else
                 {
-                    // grab the opts.Input_buffer transform it into a byte array
-                    byte[] hbInput = StringToByteArray(opts.Input_buffer);
-                    long hbInputLength = hbInput.Length;
-                    MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
-
-                    for (int i = 0; i < inputSize; i++)
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    try
                     {
-                        inputBuffer[i] = hbInput[i];
+                        Console.WriteLine("[!] Do not close this window. - IOCTLpus");
+                        Application.Run(new MainForm());
                     }
-                    MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)outputBuffer.Length);
-                    DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
-
-                    errorCode = Marshal.GetLastWin32Error();
-                    string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
-                    sfh.Close();
-                    // print out returning values
-                    Console.WriteLine("GUID:\t\t\t" + opts.Guid);
-                    Console.WriteLine("IOCTL:\t\t\t0x{0:X}", ioctl);
-                    Console.WriteLine("Input Buffer:\t" + ByteArrayToString(inputBuffer));
-                    Console.WriteLine("Returned Bytes:\t{0:D}", returnedBytes);
-                    Console.WriteLine("Output Buffer:\t" + ByteArrayToString(outputBuffer));
-                    Console.WriteLine("Error:\t\t\t0x{0:X} - " + errorMessage, errorCode);
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex);
+                    }
                 }
-            }
-            // run IOCTLpus in GUI mode
-            else
-            {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                try
-                {
-                    Application.Run(new MainForm());
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                }
-            }
+            });
         }
     }
 }
