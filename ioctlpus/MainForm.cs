@@ -3,13 +3,12 @@ using BrightIdeasSoftware;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static ioctlpus.Utilities.NativeMethods;
 using static ioctlpus.Utilities.IOCTL;
-using System.Drawing;
+using static ioctlpus.Utilities.NativeMethods;
 
 namespace ioctlpus
 {
@@ -168,7 +167,7 @@ namespace ioctlpus
         {
             uint fa_mask = Convert.ToUInt32(tbAccessMask.Text, 16);
             SafeFileHandle sfh = CreateFile(
-                tbDevicePath.Text,
+                tbDevicePath.Text.Trim(),
                 (FileAccess)fa_mask,
                 FileShare.ReadWrite,
                 IntPtr.Zero,
@@ -178,13 +177,13 @@ namespace ioctlpus
 
             int errorCode = 0;
 
-            uint ioctl = Convert.ToUInt32(tbIOCTL.Text, 16);
+            uint ioctl = Convert.ToUInt32(tbIOCTL.Text.Trim(), 16);
             uint returnedBytes = 0;
             uint inputSize = (uint)nudInputSize.Value;
             uint outputSize = (uint)nudOutputSize.Value;
             byte[] outputBuffer = new byte[outputSize];
             byte[] inputBuffer = new byte[inputSize];
-           
+
 
             if (sfh.IsInvalid)
             {

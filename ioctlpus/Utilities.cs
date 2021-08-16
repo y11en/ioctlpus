@@ -1,12 +1,7 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ioctlpus
 {
@@ -67,7 +62,7 @@ namespace ioctlpus
             public const int EM_SETCUEBANNER = 0x1501;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
-            public static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)]string lParam);
+            public static extern Int32 SendMessage(IntPtr hWnd, int msg, int wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
             public const Int32 DIGCF_PRESENT = 2;
             public const Int32 DIGCF_DEVICEINTERFACE = 0x10;
@@ -138,7 +133,7 @@ namespace ioctlpus
                 uint nOutBufferSize,
                 ref uint pBytesReturned,
                 IntPtr overlapped);
-            
+
             [DllImport("kernel32.dll")]
             public static extern bool CloseHandle(SafeFileHandle hObject);
 

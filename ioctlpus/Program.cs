@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
-using CommandLine;
-using static ioctlpus.Utilities.NativeMethods;
-using static ioctlpus.Utilities.IOCTL;
+﻿using CommandLine;
 using Microsoft.Win32.SafeHandles;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.ComponentModel;
+using System.Windows.Forms;
+using static ioctlpus.Utilities.NativeMethods;
 
 namespace ioctlpus
 {
@@ -32,7 +27,7 @@ namespace ioctlpus
 
         public static string ByteArrayToString(byte[] ba)
         {
-            string hex = "0x"+BitConverter.ToString(ba).Replace("-", " 0x");
+            string hex = "0x" + BitConverter.ToString(ba).Replace("-", " 0x");
             return hex;
         }
 
@@ -44,7 +39,7 @@ namespace ioctlpus
 
             [Option("guid", HelpText = "Path/GUID of the driver to interact with.", Default = null)]
             public string Guid { get; set; }
-            
+
             [Option("ioctl", HelpText = "IOCTL code.", Default = null)]
             public string Ioctl { get; set; }
 
@@ -53,7 +48,7 @@ namespace ioctlpus
 
             [Option('o', "output-size", HelpText = "Output Size (decimal).", Default = 32)]
             public int Output_size { get; set; }
-            
+
             [Option("input", HelpText = "Input buffer.", Default = null)]
             public string Input_buffer { get; set; }
 
@@ -97,7 +92,7 @@ namespace ioctlpus
                     // if we gathered every parameter we can proceed and perform the IOCTL request printing out the result
                     uint fa_mask = Convert.ToUInt32(opts.Access_mask, 16);
                     SafeFileHandle sfh = CreateFile(
-                        opts.Guid,
+                        opts.Guid.Trim(),
                         (FileAccess)fa_mask,
                         FileShare.ReadWrite,
                         IntPtr.Zero,
@@ -107,7 +102,7 @@ namespace ioctlpus
 
                     int errorCode = 0;
 
-                    uint ioctl = Convert.ToUInt32(opts.Ioctl, 16);
+                    uint ioctl = Convert.ToUInt32(opts.Ioctl.Trim(), 16);
                     uint returnedBytes = 0;
                     uint inputSize = (uint)opts.Input_size;
                     uint outputSize = (uint)opts.Output_size;
