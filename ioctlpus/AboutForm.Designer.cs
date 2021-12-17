@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblAbout = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.olvComponents = new BrightIdeasSoftware.ObjectListView();
             this.colComponent = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -39,16 +39,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.olvComponents)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblAbout
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(330, 86);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ioctlpus 0.2-alpha\r\n©2017 Jackson Thuraisamy (@Jackson_T)\r\nUpdated in 2021 by Pao" +
-    "lo Stagno (@Void_Sec)\r\n\r\nDedicated to my partner and family for putting up with " +
-    "me.";
+            this.lblAbout.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblAbout.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.lblAbout.Location = new System.Drawing.Point(12, 9);
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(330, 86);
+            this.lblAbout.TabIndex = 0;
+            this.lblAbout.Text = "ioctlpus 2.3.0\r\n©2017 Jackson Thuraisamy (@Jackson_T)\r\nUpdated in 2021 by Paolo S" +
+    "tagno (@Void_Sec)\r\n\r\nDedicated to my partner and family for putting up with me.";
             // 
             // groupBox1
             // 
@@ -110,15 +110,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(354, 241);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblAbout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(370, 280);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(370, 280);
             this.Name = "AboutForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About IOCTLpus";
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvComponents)).EndInit();
@@ -128,7 +128,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAbout;
         private System.Windows.Forms.GroupBox groupBox1;
         private BrightIdeasSoftware.ObjectListView olvComponents;
         private BrightIdeasSoftware.OLVColumn colComponent;

@@ -148,7 +148,7 @@ namespace ioctlpus
                     Application.SetCompatibleTextRenderingDefault(false);
                     try
                     {
-                        Console.WriteLine("[!] Do not close this window. - IOCTLpus");
+                        Console.WriteLine("[!] IOCTLpus: Do not close this window.");
                         Application.Run(new MainForm());
                     }
                     catch (Exception ex)

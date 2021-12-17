@@ -44,15 +44,17 @@ namespace ioctlpus
         /// <param name="size"></param>
         private void InitializeHexBox(HexBox hexBox, int size)
         {
+            hexBox.Visible = true;
+            hexBox.InfoForeColor = System.Drawing.Color.Black;
+            hexBox.UseFixedBytesPerLine = true;
             hexBox.BytesPerLine = 8;
             hexBox.ColumnInfoVisible = true;
+            hexBox.LineInfoVisible = true;
+            hexBox.StringViewVisible = true;
+            hexBox.VScrollBarVisible = true;
             hexBox.GroupSeparatorVisible = true;
             hexBox.GroupSize = 4;
-            hexBox.LineInfoVisible = true;
             hexBox.ShadowSelectionVisible = true;
-            hexBox.StringViewVisible = true;
-            hexBox.UseFixedBytesPerLine = true;
-            hexBox.VScrollBarVisible = true;
             hexBox.ByteProvider = new DynamicByteProvider(new byte[size]);
         }
 
@@ -336,51 +338,23 @@ namespace ioctlpus
             hbOutput.ByteProvider = dbpData;
         }
 
-        private void InPaneHexView_CheckedChanged(object sender, EventArgs e)
+        private void hbInput_ByteProviderChanged(object sender, EventArgs e)
         {
-            if (InPaneHexView.Checked == true)
-            {
-                hbInput.ColumnInfoVisible = true;
-            }
-            else
-            {
-                hbInput.ColumnInfoVisible = false;
-            }
+            //DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)hbInput.ByteProvider.Length]);
+            //nudInputSize.Value = (int)dbpData;
         }
 
-        private void OutPaneHexView_CheckedChanged(object sender, EventArgs e)
+        private void btnSettings_Click(object sender, EventArgs e)
         {
-            if (OutPaneHexView.Checked == true)
+            if (Application.OpenForms["SettingsForm"] as SettingsForm == null)
             {
-                hbOutput.ColumnInfoVisible = true;
+                SettingsForm settingsForm = new SettingsForm();
+                settingsForm.Show();
             }
             else
             {
-                hbOutput.ColumnInfoVisible = false;
-            }
-        }
-
-        private void InPaneStringsView_CheckedChanged(object sender, EventArgs e)
-        {
-            if (InPaneStringsView.Checked == true)
-            {
-                hbInput.StringViewVisible = true;
-            }
-            else
-            {
-                hbInput.StringViewVisible = false;
-            }
-        }
-
-        private void OutPaneStringsView_CheckedChanged(object sender, EventArgs e)
-        {
-            if (OutPaneStringsView.Checked == true)
-            {
-                hbOutput.StringViewVisible = true;
-            }
-            else
-            {
-                hbOutput.StringViewVisible = false;
+                SettingsForm settingsForm = Application.OpenForms["SettingsForm"] as SettingsForm;
+                settingsForm.Focus();
             }
         }
     }
