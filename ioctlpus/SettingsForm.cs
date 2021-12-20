@@ -68,6 +68,7 @@ namespace ioctlpus
         }
         private void InPaneStringsView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable ASCII string view for InPane
             if (InPaneStringsView.Checked == true)
             {
                 this._parent.hbInput.StringViewVisible = true;
@@ -79,6 +80,7 @@ namespace ioctlpus
         }
         private void OutPaneStringsView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable ASCII string view for OutPane
             if (OutPaneStringsView.Checked == true)
             {
                 this._parent.hbOutput.StringViewVisible = true;
@@ -91,6 +93,7 @@ namespace ioctlpus
 
         private void InPaneSeparatorView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable byte separator for InPane
             if (InPaneSeparatorView.Checked == true)
             {
                 this._parent.hbInput.GroupSeparatorVisible = true;
@@ -103,6 +106,7 @@ namespace ioctlpus
 
         private void OutPaneSeparatorView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable byte separator for OutPane
             if (OutPaneSeparatorView.Checked == true)
             {
                 this._parent.hbOutput.GroupSeparatorVisible = true;
@@ -115,6 +119,7 @@ namespace ioctlpus
 
         private void InPaneBarView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable hex count lines/columns for InPane
             if (InPaneBarView.Checked == true)
             {
                 this._parent.hbInput.ColumnInfoVisible = true;
@@ -129,6 +134,7 @@ namespace ioctlpus
 
         private void OutPaneBarView_CheckedChanged(object sender, EventArgs e)
         {
+            // Enable/Disable hex count lines/columns for OutPane
             if (OutPaneBarView.Checked == true)
             {
                 this._parent.hbOutput.ColumnInfoVisible = true;
@@ -143,11 +149,13 @@ namespace ioctlpus
 
         private void numNumberBytesIn_ValueChanged(object sender, EventArgs e)
         {
+            // Set how many bytes per line are allowed in InPane
             this._parent.hbInput.BytesPerLine = (int)numNumberBytesIn.Value;
         }
 
         private void numNumberBytesOut_ValueChanged(object sender, EventArgs e)
         {
+            // Set how many bytes per line are allowed in OutPane
             this._parent.hbOutput.BytesPerLine = (int)numNumberBytesOut.Value;
         }
     }

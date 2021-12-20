@@ -7,9 +7,11 @@ namespace ioctlpus
 {
     class Utilities
     {
-        // CRC16 code taken from Sanity Free Coding (2006-12-15)
-        // URL: http://www.sanity-free.com/134/standard_crc_16_in_csharp.html
-        // License: CC BY-NC-SA 3.0
+        /*
+         * CRC16 code taken from Sanity Free Coding (2006-12-15)
+         * URL: http://www.sanity-free.com/134/standard_crc_16_in_csharp.html
+         * License: CC BY-NC-SA 3.0
+        */
         public class CRC16
         {
             const ushort polynomial = 0xA001;
@@ -59,6 +61,9 @@ namespace ioctlpus
 
         public class NativeMethods
         {
+            /*
+             * Class used to "import" native functionalities
+             */
             public const int EM_SETCUEBANNER = 0x1501;
 
             [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -166,11 +171,11 @@ namespace ioctlpus
 
                     if (isEnumeratedDeviceInterfaces)
                     {
-                        // Request a structure with the device path name.
+                        // Request a structure with the device path name
                         int bufferSize = 0;
                         IntPtr detailDataBuffer;
 
-                        // Determine the buffer size.
+                        // Determine the buffer size
                         bool hasDeviceInterfaceDetail = NativeMethods.SetupDiGetDeviceInterfaceDetail(
                             deviceInfoSet,
                             ref deviceInterfaceData,
@@ -182,7 +187,7 @@ namespace ioctlpus
                         detailDataBuffer = Marshal.AllocHGlobal(bufferSize);
                         Marshal.WriteInt32(detailDataBuffer, (IntPtr.Size == 4) ? (4 + Marshal.SystemDefaultCharSize) : 8);
 
-                        // Request the structure again now that the buffer size has been determined.
+                        // Request the structure again now that the buffer size has been determined
                         hasDeviceInterfaceDetail = NativeMethods.SetupDiGetDeviceInterfaceDetail(
                             deviceInfoSet,
                             ref deviceInterfaceData,
@@ -216,6 +221,11 @@ namespace ioctlpus
             }
 
             public static bool IsValidDevicePath(string devicePath)
+            /*
+             * Check if the provided DeviceName is found on the system
+             * Note: if the access is restricred to admin-only user, it will return an "invalid" result
+             * coloring the `tbDevicePath` in red
+             */
             {
                 SafeFileHandle handle = NativeMethods.CreateFile(
                     devicePath,

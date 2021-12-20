@@ -2,8 +2,8 @@ using Be.Windows.Forms;
 using BrightIdeasSoftware;
 using Microsoft.Win32.SafeHandles;
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -22,28 +22,24 @@ namespace ioctlpus
         {
             InitializeComponent();
 
-            // Add placeholder text to filters textbox.
+            // Add placeholder text to filters textbox
             SendMessage(tbFilters.Handle, EM_SETCUEBANNER, 0, "Filters (e.g. 9C412000 br=64 !ec=C000000D)");
 
-            // Setup HexBoxes.
+            // Setup HexBoxes
             InitializeHexBox(hbInput, (int)nudInputSize.Value);
             InitializeHexBox(hbOutput, (int)nudOutputSize.Value);
 
-            // Setup TreeListView.
+            // Setup TreeListView
             InitializeTreeListView();
 
-            // Setup initial parameters.
+            // Setup initial parameters
             tbDevicePath.Text = @"\\.\PhysicalDrive0";
             tbIOCTL.Text = "70000";
             tbAccessMask.Text = "20000000";
             cmbACL.SelectedItem = "ANY_ACCESS";
         }
 
-        /// <summary>
-        /// Initialize the given buffer view.
-        /// </summary>
-        /// <param name="hexBox"></param>
-        /// <param name="size"></param>
+        // Initialize the given buffer view
         private void InitializeHexBox(HexBox hexBox, int size)
         {
             hexBox.Visible = true;
@@ -60,37 +56,35 @@ namespace ioctlpus
             hexBox.ByteProvider = new DynamicByteProvider(new byte[size]);
         }
 
-        /// <summary>
-        /// Initialize the Request History views.
-        /// </summary>
+        // Initialize the Request History views
         private void InitializeTreeListView()
         {
-            // Add colours to request rows.
+            // Add colours to request rows
             tlvRequestHistory.FormatRow += (sender, eventArgs) =>
             {
                 Request transmission = (Request)eventArgs.Model;
                 if (transmission.IsFavourite)
-                    eventArgs.Item.BackColor = System.Drawing.Color.LightYellow;
+                    eventArgs.Item.BackColor = Color.LightYellow;
                 else if (transmission.ReturnValue > 0)
-                    eventArgs.Item.BackColor = System.Drawing.Color.MistyRose;
+                    eventArgs.Item.BackColor = Color.MistyRose;
             };
 
-            // Rename requests when double-clicked or F2 is pressed.
+            // Rename requests when double-clicked or F2 is pressed
             tlvRequestHistory.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
 
-            // How to identify if a row has children.
+            // How to identify if a row has children
             tlvRequestHistory.CanExpandGetter = delegate (Object tx)
             {
                 return ((Request)tx).Children.Count > 0;
             };
 
-            // Where row children are located.
+            // Where row children are located
             tlvRequestHistory.ChildrenGetter = delegate (Object tx)
             {
                 return ((Request)tx).Children;
             };
 
-            // Populate HexBoxes when the selection changes.
+            // Populate HexBoxes when the selection changes
             tlvRequestHistory.SelectionChanged += (sender, eventArgs) =>
             {
                 if (tlvRequestHistory.SelectedIndex == -1) return;
@@ -110,11 +104,7 @@ namespace ioctlpus
             };
         }
 
-        /// <summary>
-        /// Validate provided device path.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Validate provided DeviceName
         private void tbDevicePath_TextChanged(object sender, EventArgs e)
         {
             Guid guid;
@@ -142,11 +132,7 @@ namespace ioctlpus
                 tbDevicePath.BackColor = Color.MistyRose;
         }
 
-        /// <summary>
-        /// Validate that provided IOCTL is legitimate.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Validate that provided IOCTL is legitimate
         private void tbIOCTL_TextChanged(object sender, EventArgs e)
         {
             Point toolTipCoords = tbIOCTL.Location;
@@ -169,12 +155,15 @@ namespace ioctlpus
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            uint fa_mask=Convert.ToUInt32("20000000", 16);
-            if (tbAccessMask.Enabled == true) {
+            uint fa_mask = Convert.ToUInt32("20000000", 16);
+            // if Access mask is enabled use that value
+            if (tbAccessMask.Enabled == true)
+            {
                 fa_mask = Convert.ToUInt32(tbAccessMask.Text, 16);
             }
             else
             {
+                // otherwise gather the human readable ACL
                 switch (cmbACL.SelectedItem)
                 {
                     case "ANY_ACCESS":
@@ -189,13 +178,14 @@ namespace ioctlpus
                     case "WRITE_DATA":
                         fa_mask = Convert.ToUInt32(FileAccess.Write);
                         break;
-                default:
+                    default:
                         fa_mask = 0;
                         break;
 
                 }
             }
-            Debug.WriteLine("\nAccess Mask: "+fa_mask);
+            Debug.WriteLine("\nAccess Mask: " + fa_mask);
+
             SafeFileHandle sfh = CreateFile(
             tbDevicePath.Text.Trim(),
             dwDesiredAccess: (FileAccess)fa_mask,
@@ -217,10 +207,12 @@ namespace ioctlpus
 
             if (sfh.IsInvalid)
             {
+                // invalid DeviceName
                 errorCode = Marshal.GetLastWin32Error();
             }
             else
             {
+                // create buffer with specified content in memory
                 long hbInputLength = ((DynamicByteProvider)hbInput.ByteProvider).Length;
                 MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
 
@@ -232,18 +224,19 @@ namespace ioctlpus
 
                 long hbOutputLength = ((DynamicByteProvider)hbOutput.ByteProvider).Length;
                 MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)hbOutputLength);
+                // execute DeviceIoControl request
                 DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
-
+                // gather error code
                 errorCode = Marshal.GetLastWin32Error();
                 sfh.Close();
-
+                // update Input/Output views
                 DynamicByteProvider requestData = new DynamicByteProvider(inputBuffer);
                 hbInput.ByteProvider = requestData;
 
                 DynamicByteProvider responseData = new DynamicByteProvider(outputBuffer);
                 hbOutput.ByteProvider = responseData;
             }
-
+            // update request view
             Request newTx = new Request();
             newTx.RequestName = String.Format(
                 "0x{0:X} ({1:X4}-{2:D5})",
@@ -283,11 +276,7 @@ namespace ioctlpus
             return;
         }
 
-        /// <summary>
-        /// Mark the selected request as a favourite.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Mark the selected request as a favourite
         private void btnStarRequest_Click(object sender, EventArgs e)
         {
             if (tlvRequestHistory.SelectedIndex == -1) return;
@@ -300,11 +289,7 @@ namespace ioctlpus
             // ToDo
         }
 
-        /// <summary>
-        /// Filters results in the Request History view (TODO).
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Filters results in the Request History view (TODO)
         private void tbFilters_TextChanged(object sender, EventArgs e)
         {
             tlvRequestHistory.ModelFilter = null;
@@ -314,11 +299,7 @@ namespace ioctlpus
             });
         }
 
-        /// <summary>
-        /// Shows the About window.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        // Shows the About window
         private void btnAbout_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms["AboutForm"] as AboutForm == null)
@@ -333,6 +314,7 @@ namespace ioctlpus
             }
         }
 
+        // parse and validate Access Mask
         private void tbAccessMask_TextChanged(object sender, EventArgs e)
         {
             Point toolTipCoords = tbAccessMask.Location;
@@ -354,12 +336,14 @@ namespace ioctlpus
 
         }
 
+        // update input panel when the InputSize is changed
         private void nudInputSize_ValueChanged(object sender, EventArgs e)
         {
             DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudInputSize.Value]);
             hbInput.ByteProvider = dbpData;
         }
 
+        // update output panel when the OutputSize is changed
         private void nudOutputSize_ValueChanged(object sender, EventArgs e)
         {
             DynamicByteProvider dbpData = new DynamicByteProvider(new byte[(int)nudOutputSize.Value]);
@@ -372,6 +356,7 @@ namespace ioctlpus
             //nudInputSize.Value = (int)dbpData;
         }
 
+        // show the settings form
         private void btnSettings_Click(object sender, EventArgs e)
         {
             if (Application.OpenForms["SettingsForm"] as SettingsForm == null)
@@ -386,6 +371,7 @@ namespace ioctlpus
             }
         }
 
+        // enable/disable access mask
         private void chkEnableAccessMask_CheckedChanged(object sender, EventArgs e)
         {
             if (chkEnableAccessMask.Checked == true)
@@ -398,7 +384,7 @@ namespace ioctlpus
                 tbAccessMask.Enabled = false;
                 cmbACL.Enabled = true;
             }
-            
+
         }
     }
 }

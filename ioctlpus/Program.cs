@@ -14,6 +14,7 @@ namespace ioctlpus
     {
         public static byte[] StringToByteArray(string hex)
         {
+            // Convert a string to a byte array
             if (hex.Length % 2 == 1)
             {
                 throw new Exception("The binary string cannot have an odd number of digits");
@@ -27,13 +28,14 @@ namespace ioctlpus
 
         public static string ByteArrayToString(byte[] ba)
         {
+            // Convert a byte array to a string
             string hex = "0x" + BitConverter.ToString(ba).Replace("-", " 0x");
             return hex;
         }
 
-        // args options
         class Options
         {
+            // args options
             [Option("cli", HelpText = "Run IOCTLpus in CLI mode.")]
             public bool Cli { get; set; }
 
@@ -60,9 +62,7 @@ namespace ioctlpus
 
         }
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        // The main entry point for the application.
         [STAThread]
         static void Main(string[] args)
         {
@@ -73,7 +73,7 @@ namespace ioctlpus
                 if (opts.Cli)
                 {
                     Console.WriteLine("IOCTLpus CLI Mode\n--------------------\n");
-                    // hanlde some required parameters
+                    // hanlde some required arguments
                     if (opts.Guid == null)
                     {
                         Console.WriteLine("Required option 'guid' is missing.");
@@ -89,7 +89,7 @@ namespace ioctlpus
                         Console.WriteLine("Required option 'input' is missing.");
                         return;
                     }
-                    // if we gathered every parameter we can proceed and perform the IOCTL request printing out the result
+                    // if we gathered every required arguments we can proceed and perform the IOCTL request printing out the result
                     uint fa_mask = Convert.ToUInt32(opts.Access_mask, 16);
                     SafeFileHandle sfh = CreateFile(
                         opts.Guid.Trim(),
@@ -111,13 +111,14 @@ namespace ioctlpus
 
                     if (sfh.IsInvalid)
                     {
+                        // print out last occured error (e.g DeviceName not found)
                         string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
                         Console.WriteLine(errorMessage);
                         return;
                     }
                     else
                     {
-                        // grab the opts.Input_buffer transform it into a byte array
+                        // grab the opts.Input_buffer and transform it into a byte array
                         byte[] hbInput = StringToByteArray(opts.Input_buffer);
                         long hbInputLength = hbInput.Length;
                         MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(inputBuffer, 0), 0, (int)hbInputLength);
@@ -127,12 +128,13 @@ namespace ioctlpus
                             inputBuffer[i] = hbInput[i];
                         }
                         MemSet(Marshal.UnsafeAddrOfPinnedArrayElement(outputBuffer, 0), 0, (int)outputBuffer.Length);
+                        // send DeviceIoControl
                         DeviceIoControl(sfh, ioctl, inputBuffer, inputSize, outputBuffer, outputSize, ref returnedBytes, IntPtr.Zero);
-
+                        // gather last occured error (e.g Access Denied)
                         errorCode = Marshal.GetLastWin32Error();
                         string errorMessage = new Win32Exception(Marshal.GetLastWin32Error()).Message;
                         sfh.Close();
-                        // print out returning values
+                        // print out DeviceIoControl returning values
                         Console.WriteLine("GUID:\t\t" + opts.Guid);
                         Console.WriteLine("IOCTL:\t\t0x{0:X}", ioctl);
                         Console.WriteLine("Input Buffer:\t" + ByteArrayToString(inputBuffer));
@@ -141,9 +143,9 @@ namespace ioctlpus
                         Console.WriteLine("Error:\t\t0x{0:X} - " + errorMessage, errorCode);
                     }
                 }
-                // run IOCTLpus in GUI mode
                 else
                 {
+                    // run IOCTLpus in GUI mode
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     try

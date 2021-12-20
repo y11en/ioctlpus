@@ -9,12 +9,14 @@ namespace ioctlpus
         {
             InitializeComponent();
             InitializeOSC();
+            // load about text and assembly version, instead of having it hardcoded
             string version = Application.ProductVersion;
-            lblAbout.Text = "ioctlpus "+version+"\nCreated in 2017 by Jackson Thuraisamy(@Jackson_T)\nUpdated and mantained by Paolo Stagno(@Void_Sec)\n\nDedicated to my partner and family for putting up with me.";
+            lblAbout.Text = "ioctlpus " + version + "\nCreated in 2017 by Jackson Thuraisamy(@Jackson_T)\nUpdated and mantained by Paolo Stagno(@Void_Sec)\n\nDedicated to my partner and family for putting up with me.";
         }
 
         private void InitializeOSC()
         {
+            // populate list of open source components
             List<OpenSourceComponent> components = new List<OpenSourceComponent>();
 
             components.Add(new OpenSourceComponent("HexBox", "Bernhard Elbl", "MIT"));
