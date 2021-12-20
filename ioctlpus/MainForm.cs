@@ -348,7 +348,7 @@ namespace ioctlpus
             }
             else
             {
-                tbAccessMask.BackColor = Color.White;
+                tbAccessMask.BackColor = Color.Honeydew;
                 btnSend.Enabled = true;
             }
 

@@ -374,9 +374,8 @@
             this.tbAccessMask.Location = new System.Drawing.Point(339, 37);
             this.tbAccessMask.MaxLength = 8;
             this.tbAccessMask.Name = "tbAccessMask";
-            this.tbAccessMask.Size = new System.Drawing.Size(90, 20);
+            this.tbAccessMask.Size = new System.Drawing.Size(61, 20);
             this.tbAccessMask.TabIndex = 3;
-            this.tbAccessMask.Text = "20000000";
             this.tbAccessMask.TextChanged += new System.EventHandler(this.tbAccessMask_TextChanged);
             // 
             // lblOutputSize
@@ -458,7 +457,7 @@
             this.tbIOCTL.Location = new System.Drawing.Point(313, 12);
             this.tbIOCTL.MaxLength = 8;
             this.tbIOCTL.Name = "tbIOCTL";
-            this.tbIOCTL.Size = new System.Drawing.Size(116, 20);
+            this.tbIOCTL.Size = new System.Drawing.Size(87, 20);
             this.tbIOCTL.TabIndex = 2;
             this.tbIOCTL.TextChanged += new System.EventHandler(this.tbIOCTL_TextChanged);
             // 
