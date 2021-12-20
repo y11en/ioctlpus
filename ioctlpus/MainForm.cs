@@ -2,6 +2,7 @@ using Be.Windows.Forms;
 using BrightIdeasSoftware;
 using Microsoft.Win32.SafeHandles;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -35,6 +36,7 @@ namespace ioctlpus
             tbDevicePath.Text = @"\\.\PhysicalDrive0";
             tbIOCTL.Text = "70000";
             tbAccessMask.Text = "20000000";
+            cmbACL.SelectedItem = "ANY_ACCESS";
         }
 
         /// <summary>
@@ -119,8 +121,8 @@ namespace ioctlpus
             if (Guid.TryParse(tbDevicePath.Text, out guid))
             {
                 Point toolTipCoords = tbDevicePath.Location;
-                toolTipCoords.X += 20;
-                toolTipCoords.Y -= 4;
+                //toolTipCoords.X += 20;
+                //toolTipCoords.Y -= 4;
 
                 try
                 {
@@ -135,9 +137,9 @@ namespace ioctlpus
             }
 
             if (IsValidDevicePath(tbDevicePath.Text))
-                tbDevicePath.BackColor = System.Drawing.Color.Honeydew;
+                tbDevicePath.BackColor = Color.Honeydew;
             else
-                tbDevicePath.BackColor = System.Drawing.Color.MistyRose;
+                tbDevicePath.BackColor = Color.MistyRose;
         }
 
         /// <summary>
@@ -148,34 +150,60 @@ namespace ioctlpus
         private void tbIOCTL_TextChanged(object sender, EventArgs e)
         {
             Point toolTipCoords = tbIOCTL.Location;
-            toolTipCoords.X -= 89;
-            toolTipCoords.Y -= 27;
+            toolTipCoords.X -= 400;
+            toolTipCoords.Y += 5;
 
             uint ioctl;
             if (!UInt32.TryParse(tbIOCTL.Text, System.Globalization.NumberStyles.HexNumber, null, out ioctl))
             {
-                tbIOCTL.BackColor = System.Drawing.Color.MistyRose;
+                tbIOCTL.BackColor = Color.MistyRose;
                 btnSend.Enabled = false;
                 toolTip.Show("IOCTL codes must be in hexadecimal format.", tbIOCTL, toolTipCoords, 3000);
             }
             else
             {
-                tbIOCTL.BackColor = System.Drawing.Color.White;
+                tbIOCTL.BackColor = Color.Honeydew;
                 btnSend.Enabled = true;
             }
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            uint fa_mask = Convert.ToUInt32(tbAccessMask.Text, 16);
+            uint fa_mask=Convert.ToUInt32("20000000", 16);
+            if (tbAccessMask.Enabled == true) {
+                fa_mask = Convert.ToUInt32(tbAccessMask.Text, 16);
+            }
+            else
+            {
+                switch (cmbACL.SelectedItem)
+                {
+                    case "ANY_ACCESS":
+                        fa_mask = 0;
+                        break;
+                    case "READ_WRITE_DATA":
+                        fa_mask = Convert.ToUInt32(FileAccess.ReadWrite);
+                        break;
+                    case "READ_DATA":
+                        fa_mask = Convert.ToUInt32(FileAccess.Read);
+                        break;
+                    case "WRITE_DATA":
+                        fa_mask = Convert.ToUInt32(FileAccess.Write);
+                        break;
+                default:
+                        fa_mask = 0;
+                        break;
+
+                }
+            }
+            Debug.WriteLine("\nAccess Mask: "+fa_mask);
             SafeFileHandle sfh = CreateFile(
-                tbDevicePath.Text.Trim(),
-                (FileAccess)fa_mask,
-                FileShare.ReadWrite,
-                IntPtr.Zero,
-                FileMode.Open,
-                FileAttributes.Normal,
-                IntPtr.Zero);
+            tbDevicePath.Text.Trim(),
+            dwDesiredAccess: (FileAccess)fa_mask,
+            dwShareMode: FileShare.ReadWrite,
+            lpSecurityAttributes: IntPtr.Zero,
+            dwCreationDisposition: FileMode.Open,
+            dwFlagsAndAttributes: FileAttributes.Normal,
+            hTemplateFile: IntPtr.Zero);
 
             int errorCode = 0;
 
@@ -308,19 +336,19 @@ namespace ioctlpus
         private void tbAccessMask_TextChanged(object sender, EventArgs e)
         {
             Point toolTipCoords = tbAccessMask.Location;
-            toolTipCoords.X -= 89;
-            toolTipCoords.Y -= 27;
+            toolTipCoords.X -= 400;
+            toolTipCoords.Y -= 20;
 
             uint fa_mask;
             if (!UInt32.TryParse(tbAccessMask.Text, System.Globalization.NumberStyles.HexNumber, null, out fa_mask))
             {
-                tbAccessMask.BackColor = System.Drawing.Color.MistyRose;
+                tbAccessMask.BackColor = Color.MistyRose;
                 btnSend.Enabled = false;
                 toolTip.Show("Access Mask code must be in hexadecimal format.", tbAccessMask, toolTipCoords, 3000);
             }
             else
             {
-                tbAccessMask.BackColor = System.Drawing.Color.White;
+                tbAccessMask.BackColor = Color.White;
                 btnSend.Enabled = true;
             }
 
@@ -356,6 +384,21 @@ namespace ioctlpus
                 SettingsForm settingsForm = Application.OpenForms["SettingsForm"] as SettingsForm;
                 settingsForm.Focus();
             }
+        }
+
+        private void chkEnableAccessMask_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkEnableAccessMask.Checked == true)
+            {
+                tbAccessMask.Enabled = true;
+                cmbACL.Enabled = false;
+            }
+            else
+            {
+                tbAccessMask.Enabled = false;
+                cmbACL.Enabled = true;
+            }
+            
         }
     }
 }

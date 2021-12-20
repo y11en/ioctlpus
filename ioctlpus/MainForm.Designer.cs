@@ -45,7 +45,9 @@
             this.hbInput = new Be.Windows.Forms.HexBox();
             this.tlpTop = new System.Windows.Forms.TableLayoutPanel();
             this.pnlReqParams = new System.Windows.Forms.Panel();
-            this.lblInputAccessMask = new System.Windows.Forms.Label();
+            this.cmbACL = new System.Windows.Forms.ComboBox();
+            this.chkEnableAccessMask = new System.Windows.Forms.CheckBox();
+            this.lblHumanACL = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbAccessMask = new System.Windows.Forms.TextBox();
             this.lblOutputSize = new System.Windows.Forms.Label();
@@ -291,7 +293,9 @@
             this.pnlReqParams.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlReqParams.Controls.Add(this.lblInputAccessMask);
+            this.pnlReqParams.Controls.Add(this.cmbACL);
+            this.pnlReqParams.Controls.Add(this.chkEnableAccessMask);
+            this.pnlReqParams.Controls.Add(this.lblHumanACL);
             this.pnlReqParams.Controls.Add(this.btnSend);
             this.pnlReqParams.Controls.Add(this.tbAccessMask);
             this.pnlReqParams.Controls.Add(this.lblOutputSize);
@@ -310,15 +314,41 @@
             this.pnlReqParams.Size = new System.Drawing.Size(1123, 103);
             this.pnlReqParams.TabIndex = 0;
             // 
-            // lblInputAccessMask
+            // cmbACL
             // 
-            this.lblInputAccessMask.AutoSize = true;
-            this.lblInputAccessMask.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblInputAccessMask.Location = new System.Drawing.Point(184, 34);
-            this.lblInputAccessMask.Name = "lblInputAccessMask";
-            this.lblInputAccessMask.Size = new System.Drawing.Size(74, 13);
-            this.lblInputAccessMask.TabIndex = 13;
-            this.lblInputAccessMask.Text = "Access Mask:";
+            this.cmbACL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbACL.FormattingEnabled = true;
+            this.cmbACL.Items.AddRange(new object[] {
+            "ANY_ACCESS",
+            "READ_WRITE_DATA",
+            "READ_DATA",
+            "WRITE_DATA"});
+            this.cmbACL.Location = new System.Drawing.Point(87, 36);
+            this.cmbACL.MaxDropDownItems = 4;
+            this.cmbACL.Name = "cmbACL";
+            this.cmbACL.Size = new System.Drawing.Size(131, 21);
+            this.cmbACL.TabIndex = 17;
+            // 
+            // chkEnableAccessMask
+            // 
+            this.chkEnableAccessMask.AutoSize = true;
+            this.chkEnableAccessMask.Location = new System.Drawing.Point(240, 37);
+            this.chkEnableAccessMask.Name = "chkEnableAccessMask";
+            this.chkEnableAccessMask.Size = new System.Drawing.Size(93, 17);
+            this.chkEnableAccessMask.TabIndex = 16;
+            this.chkEnableAccessMask.Text = "Access Mask:";
+            this.chkEnableAccessMask.UseVisualStyleBackColor = true;
+            this.chkEnableAccessMask.CheckedChanged += new System.EventHandler(this.chkEnableAccessMask_CheckedChanged);
+            // 
+            // lblHumanACL
+            // 
+            this.lblHumanACL.AutoSize = true;
+            this.lblHumanACL.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblHumanACL.Location = new System.Drawing.Point(14, 39);
+            this.lblHumanACL.Name = "lblHumanACL";
+            this.lblHumanACL.Size = new System.Drawing.Size(67, 13);
+            this.lblHumanACL.TabIndex = 15;
+            this.lblHumanACL.Text = "Human ACL:";
             // 
             // btnSend
             // 
@@ -339,12 +369,14 @@
             // tbAccessMask
             // 
             this.tbAccessMask.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbAccessMask.Enabled = false;
             this.tbAccessMask.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.tbAccessMask.Location = new System.Drawing.Point(264, 32);
+            this.tbAccessMask.Location = new System.Drawing.Point(339, 37);
             this.tbAccessMask.MaxLength = 8;
             this.tbAccessMask.Name = "tbAccessMask";
             this.tbAccessMask.Size = new System.Drawing.Size(90, 20);
             this.tbAccessMask.TabIndex = 3;
+            this.tbAccessMask.Text = "20000000";
             this.tbAccessMask.TextChanged += new System.EventHandler(this.tbAccessMask_TextChanged);
             // 
             // lblOutputSize
@@ -382,7 +414,7 @@
             this.lblRepeat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRepeat.AutoSize = true;
             this.lblRepeat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRepeat.Location = new System.Drawing.Point(376, 8);
+            this.lblRepeat.Location = new System.Drawing.Point(904, 38);
             this.lblRepeat.Name = "lblRepeat";
             this.lblRepeat.Size = new System.Drawing.Size(45, 13);
             this.lblRepeat.TabIndex = 8;
@@ -391,11 +423,13 @@
             // nudRepeat
             // 
             this.nudRepeat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nudRepeat.Enabled = false;
             this.nudRepeat.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.nudRepeat.Location = new System.Drawing.Point(427, 6);
+            this.nudRepeat.Location = new System.Drawing.Point(955, 36);
             this.nudRepeat.Name = "nudRepeat";
             this.nudRepeat.Size = new System.Drawing.Size(65, 20);
             this.nudRepeat.TabIndex = 7;
+            this.nudRepeat.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblInputSize
             // 
@@ -411,7 +445,7 @@
             // 
             this.lblIOCTLCode.AutoSize = true;
             this.lblIOCTLCode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblIOCTLCode.Location = new System.Drawing.Point(18, 34);
+            this.lblIOCTLCode.Location = new System.Drawing.Point(238, 13);
             this.lblIOCTLCode.Name = "lblIOCTLCode";
             this.lblIOCTLCode.Size = new System.Drawing.Size(69, 13);
             this.lblIOCTLCode.TabIndex = 5;
@@ -419,19 +453,21 @@
             // 
             // tbIOCTL
             // 
+            this.tbIOCTL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbIOCTL.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.tbIOCTL.Location = new System.Drawing.Point(88, 32);
+            this.tbIOCTL.Location = new System.Drawing.Point(313, 12);
+            this.tbIOCTL.MaxLength = 8;
             this.tbIOCTL.Name = "tbIOCTL";
-            this.tbIOCTL.Size = new System.Drawing.Size(90, 20);
+            this.tbIOCTL.Size = new System.Drawing.Size(116, 20);
             this.tbIOCTL.TabIndex = 2;
             this.tbIOCTL.TextChanged += new System.EventHandler(this.tbIOCTL_TextChanged);
             // 
             // tbDevicePath
             // 
             this.tbDevicePath.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.tbDevicePath.Location = new System.Drawing.Point(88, 6);
+            this.tbDevicePath.Location = new System.Drawing.Point(87, 12);
             this.tbDevicePath.Name = "tbDevicePath";
-            this.tbDevicePath.Size = new System.Drawing.Size(266, 20);
+            this.tbDevicePath.Size = new System.Drawing.Size(131, 20);
             this.tbDevicePath.TabIndex = 1;
             this.tbDevicePath.TextChanged += new System.EventHandler(this.tbDevicePath_TextChanged);
             // 
@@ -439,7 +475,7 @@
             // 
             this.lblDevPath.AutoSize = true;
             this.lblDevPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblDevPath.Location = new System.Drawing.Point(18, 8);
+            this.lblDevPath.Location = new System.Drawing.Point(11, 14);
             this.lblDevPath.Name = "lblDevPath";
             this.lblDevPath.Size = new System.Drawing.Size(70, 13);
             this.lblDevPath.TabIndex = 2;
@@ -602,7 +638,6 @@
         private System.Windows.Forms.GroupBox gbLeftPane;
         private System.Windows.Forms.TableLayoutPanel tlpTop;
         private System.Windows.Forms.Panel pnlReqParams;
-        private System.Windows.Forms.Label lblInputAccessMask;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox tbAccessMask;
         private System.Windows.Forms.Label lblOutputSize;
@@ -631,6 +666,9 @@
         private BrightIdeasSoftware.OLVColumn olvColumnTime;
         public Be.Windows.Forms.HexBox hbOutput;
         public Be.Windows.Forms.HexBox hbInput;
+        private System.Windows.Forms.Label lblHumanACL;
+        private System.Windows.Forms.CheckBox chkEnableAccessMask;
+        private System.Windows.Forms.ComboBox cmbACL;
     }
 }
 
