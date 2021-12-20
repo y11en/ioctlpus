@@ -3,7 +3,7 @@
 
 IOCTLpus can be used to make `DeviceIoControl` requests with arbitrary inputs (with functionality somewhat similar to Burp Repeater).
 
-Here is an example of an information leak triggered in a sample vulnerable driver:
+Here is an example of a communication with a driver:
 
 ![IOCTLpus Example](static/ioctlpus_example.png)
 

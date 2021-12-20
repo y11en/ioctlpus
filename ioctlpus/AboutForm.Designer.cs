@@ -47,8 +47,6 @@
             this.lblAbout.Name = "lblAbout";
             this.lblAbout.Size = new System.Drawing.Size(330, 86);
             this.lblAbout.TabIndex = 0;
-            this.lblAbout.Text = "ioctlpus 2.3.0\r\n©2017 Jackson Thuraisamy (@Jackson_T)\r\nUpdated in 2021 by Paolo S" +
-    "tagno (@Void_Sec)\r\n\r\nDedicated to my partner and family for putting up with me.";
             // 
             // groupBox1
             // 

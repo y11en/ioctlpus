@@ -9,6 +9,8 @@ namespace ioctlpus
         {
             InitializeComponent();
             InitializeOSC();
+            string version = Application.ProductVersion;
+            lblAbout.Text = "ioctlpus "+version+"\nCreated in 2017 by Jackson Thuraisamy(@Jackson_T)\nUpdated and mantained by Paolo Stagno(@Void_Sec)\n\nDedicated to my partner and family for putting up with me.";
         }
 
         private void InitializeOSC()
