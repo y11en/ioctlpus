@@ -348,7 +348,7 @@ namespace ioctlpus
         {
             if (Application.OpenForms["SettingsForm"] as SettingsForm == null)
             {
-                SettingsForm settingsForm = new SettingsForm();
+                SettingsForm settingsForm = new SettingsForm(this);
                 settingsForm.Show();
             }
             else

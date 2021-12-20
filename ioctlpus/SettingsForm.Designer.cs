@@ -306,10 +306,10 @@ namespace ioctlpus
         private System.Windows.Forms.Button btnImportSettings;
         private System.Windows.Forms.Button btnExportSettings;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.NumericUpDown numNumberBytesIn;
         private System.Windows.Forms.Label lblNumberBytesIn;
         private System.Windows.Forms.CheckBox InPaneStringsView;
-        private System.Windows.Forms.NumericUpDown numNumberBytesOut;
         private System.Windows.Forms.Label lblNumberBytesOut;
+        public System.Windows.Forms.NumericUpDown numNumberBytesIn;
+        public System.Windows.Forms.NumericUpDown numNumberBytesOut;
     }
 }
